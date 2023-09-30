@@ -1,0 +1,84 @@
+{
+    "Deck": [
+        {
+            "cardName": "Gardevoir",
+            "Set": "",
+            "quantity": "2"
+        },
+        {
+            "cardName": "Kirlia",
+            "Set": "",
+            "quantity": "2"
+        },
+        {
+            "cardName": "Ralts",
+            "Set": "",
+            "quantity": "4"
+        },
+        {
+            "cardName": "Meditite",
+            "Set": "",
+            "quantity": "4"
+        },
+        {
+            "cardName": "Medicham",
+            "Set": "",
+            "quantity": "2"
+        },
+        {
+            "cardName": "Makuhita",
+            "Set": "",
+            "quantity": "4"
+        },
+        {
+            "cardName": "Hariyama",
+            "Set": "",
+            "quantity": "2"
+        },
+        {
+            "cardName": "Eevee",
+            "Set": "",
+            "quantity": "4"
+        },
+        {
+            "cardName": "Espeon",
+            "Set": "",
+            "quantity": "2"
+        },
+        {
+            "cardName": "Energy Removal 2",
+            "Set": "",
+            "quantity": "2"
+        },
+        {
+            "cardName": "TV Reporter",
+            "Set": "",
+            "quantity": "2"
+        },
+        {
+            "cardName": "Wally's Training",
+            "Set": "",
+            "quantity": "2"
+        },
+        {
+            "cardName": "Energy Search",
+            "Set": "",
+            "quantity": "2"
+        },
+        {
+            "cardName": "Switch",
+            "Set": "",
+            "quantity": "2"
+        },
+        {
+            "cardName": "Psychic Energy",
+            "Set": "",
+            "quantity": "14"
+        },
+        {
+            "cardName": "Fighting Energy",
+            "Set": "",
+            "quantity": "10"
+        }
+    ]
+}

@@ -1,0 +1,85 @@
+{
+    "Deck": [
+        {
+            "cardName": "Blaziken",
+            "Set": "ExMasterTrainerBlazikenDeck.json",
+            "quantity": "2"
+        },
+        {
+            "cardName": "Combusken",
+            "Set": "ExMasterTrainerBlazikenDeck.json",
+            "quantity": "2"
+        },
+        {
+            "cardName": "Torchic",
+            "Set": "ExMasterTrainerBlazikenDeck.json",
+            "quantity": "4"
+        },
+        {
+            "cardName": "Numel",
+            "Set": "ExMasterTrainerBlazikenDeck.json",
+            "quantity": "4"
+        },
+        {
+            "cardName": "Camerupt",
+            "Set": "ExMasterTrainerBlazikenDeck.json",
+            "quantity": "2"
+        },
+        {
+            "cardName": "Goldeen",
+            "Set": "ExMasterTrainerBlazikenDeck.json",
+            "quantity": "4"
+        },
+        {
+            "cardName": "Seaking",
+            "Set": "ExMasterTrainerBlazikenDeck.json",
+            "quantity": "2"
+        },
+        {
+            "cardName": "Horsea",
+            "Set": "ExMasterTrainerBlazikenDeck.json",
+            "quantity": "4"
+        },
+        {
+            "cardName": "Seadra",
+            "Set": "ExMasterTrainerBlazikenDeck.json",
+            "quantity": "2"
+        },
+        {
+            "cardName": "Celio's Network",
+            "Set": "ExMasterTrainerBlazikenDeck.json",
+            "quantity": "2"
+        },
+        {
+            "cardName": "Life Herb",
+            "Set": "ExMasterTrainerBlazikenDeck.json",
+            "quantity": "2"
+        },
+        {
+            "cardName": "Professor Birch",
+            "Set": "ExMasterTrainerBlazikenDeck.json",
+            "quantity": "2"
+        },
+        {
+            "cardName": "Energy Search",
+            "Set": "ExMasterTrainerBlazikenDeck.json",
+            "quantity": "2"
+        },
+        {
+            "cardName": "Switch",
+            "Set": "ExMasterTrainerBlazikenDeck.json",
+            "quantity": "2"
+        },
+        {
+            "cardName": "Fire Energy",
+            "Set": "ExMasterTrainerBlazikenDeck.json",
+            "quantity": "16"
+
+        },
+        {
+            "cardName": "Water Energy",
+            "Set": "ExMasterTrainerBlazikenDeck.json",
+            "quantity": "8"
+        }
+    ]
+}

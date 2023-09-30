@@ -1,0 +1,414 @@
+{
+    "SetName": "Ex Master Trainer - Blaziken Deck",
+    "Cards": [
+        {
+            "cardName": "Blaziken",
+            "cardType": "Pokemon",
+            "info": {
+                "type": "Fire",
+                "hp": "150",
+                "stage": "2",
+                "evolvesFrom": "Combusken",
+                "weakness": "Water",
+                "resistance": "None",
+                "retreat": "2",
+                "moves": [
+                    {
+                        "moveName": "Firestarter",
+                        "type": "PokePower",
+                        "description": "Once during your turn (before your attack), you may attach a Fire Energy card from your discard pile to 1 of your Benched Pokémon. This power can't be used if Blaziken is affected by a Special Condition."
+                    },
+                    {
+                        "moveName": "Fire Stream",
+                        "type": "Attack",
+                        "cost": [
+                            {
+                                "energy": "Fire"
+                            },
+                            {
+                                "energy": "Any"
+                            },
+                            {
+                                "energy": "Any"
+                            }
+                        ],
+                        "damage": "50",
+                        "description": "Discard a Fire Energy card attached to Blaziken. If you do, this attack does 10 damage to each of your opponent's Benched Pokémon. (Don't apply Weakness and Resistance for Benched Pokémon)"
+                    }
+                ]
+            }
+        },
+        {
+            "cardName": "Combusken",
+            "cardType": "Pokemon",
+            "info": {
+                "type": "Fire",
+                "hp": "70",
+                "stage": "1",
+                "evolvesFrom": "Torchic",
+                "weakness": "Water",
+                "resistance": "None",
+                "retreat": "1",
+                "moves": [
+                    {
+                        "moveName": "Flare",
+                        "type": "Attack",
+                        "cost": [
+                            {
+                                "energy": "Fire"
+                            }
+                        ],
+                        "damage": "20",
+                        "description": "None"
+                    },
+                    {
+                        "moveName": "Double Kick",
+                        "type": "Attack",
+                        "cost": [
+                            {
+                                "energy": "Any"
+                            },
+                            {
+                                "energy": "Any"
+                            },
+                            {
+                                "energy": "Any"
+                            }
+                        ],
+                        "damage": "40",
+                        "description": "Flip 2 coins. This attack does 40 damage times the number of heads."
+                    }
+                ]
+            }
+        },
+        {
+            "cardName": "Torchic",
+            "cardType": "Pokemon",
+            "info": {
+                "type": "Fire",
+                "hp": "40",
+                "stage": "Basic",
+                "evolvesFrom": "None",
+                "weakness": "Water",
+                "resistance": "None",
+                "retreat": "1",
+                "moves": [
+                    {
+                        "moveName": "Peck",
+                        "type": "Attack",
+                        "cost": [
+                            {
+                                "energy": "Any"
+                            }
+                        ],
+                        "damage": "10",
+                        "description": "None"
+                    },
+                    {
+                        "moveName": "Fireworks",
+                        "type": "Attack",
+                        "cost": [
+                            {
+                                "energy": "Fire"
+                            },
+                            {
+                                "energy": "Any"
+                            }
+                        ],
+                        "damage": "30",
+                        "description": "Flip a coin. If tails, discard a Fire Energy card attached to Torchic. "
+                    }
+                ]
+            }
+        },
+        {
+            "cardName": "Numel",
+            "cardType": "Pokemon",
+            "info": {
+                "type": "Fire",
+                "hp": "40",
+                "stage": "Basic",
+                "evolvesFrom": "None",
+                "weakness": "Water",
+                "resistance": "None",
+                "retreat": "1",
+                "moves": [
+                    {
+                        "moveName": "Firebreathing",
+                        "type": "Attack",
+                        "cost": [
+                            {
+                                "energy": "Fire"
+                            }
+                        ],
+                        "damage": "10",
+                        "description": "Flip a coin. If heads, this attack does 10 damage plus 10 more damage."
+                    },
+                    {
+                        "moveName": "Tackle",
+                        "type": "Attack",
+                        "cost": [
+                            {
+                                "energy": "Any"
+                            },
+                            {
+                                "energy": "Any"
+                            }
+                        ],
+                        "damage": "20",
+                        "description": ""
+                    }
+                ]
+            }
+        },
+        {
+            "cardName": "Camerupt",
+            "cardType": "Pokemon",
+            "info": {
+                "type": "Fire",
+                "hp": "80",
+                "stage": "1",
+                "evolvesFrom": "Numel",
+                "weakness": "Water",
+                "resistance": "None",
+                "retreat": "2",
+                "moves": [
+                    {
+                        "moveName": "Super Singe",
+                        "type": "Attack",
+                        "cost": [
+                            {
+                                "energy": "Fire"
+                            },
+                            {
+                                "energy": "Any"
+                            }
+                        ],
+                        "damage": "20",
+                        "description": "Flip a coin. If heads, the Defending Pokemon is now Burned."
+                    },
+                    {
+                        "moveName": "Ram",
+                        "type": "Attack",
+                        "cost": [
+                            {
+                                "energy": "Fire"
+                            },
+                            {
+                                "energy": "Any"
+                            },
+                            {
+                                "energy": "Any"
+                            }
+                        ],
+                        "damage": "50",
+                        "description": ""
+                    }
+                ]
+            }
+        },
+        {
+            "cardName": "Goldeen",
+            "cardType": "Pokemon",
+            "info": {
+                "type": "Water",
+                "hp": "50",
+                "stage": "Basic",
+                "evolvesFrom": "None",
+                "weakness": "Lightning",
+                "resistance": "None",
+                "retreat": "1",
+                "moves": [
+                    {
+                        "moveName": "Flail",
+                        "type": "Attack",
+                        "cost": [
+                            {
+                                "energy": "Any"
+                            }
+                        ],
+                        "damage": "0",
+                        "description": "Does 10 damage for each damage counter on Goldeen"
+                    }
+                ]
+            }
+        },
+        {
+            "cardName": "Seaking",
+            "cardType": "Pokemon",
+            "info": {
+                "type": "Water",
+                "hp": "70",
+                "stage": "1",
+                "evolvesFrom": "Goldeen",
+                "weakness": "Lightning",
+                "resistance": "None",
+                "retreat": "0",
+                "moves": [
+                    {
+                        "moveName": "Water Arrow",
+                        "type": "Attack",
+                        "cost": [
+                            {
+                                "energy": "Water"
+                            }
+                        ],
+                        "damage": "0",
+                        "description": "Choose 1 of your opponent's Pokémon. This attack does 20 damage to that Pokémon. (Don't apply Weakness and Resistance for Benched Pokémon.) "
+                    },
+                    {
+                        "moveName": "Fast Stream",
+                        "type": "Attack",
+                        "cost": [
+                            {
+                                "energy": "Any"
+                            },
+                            {
+                                "energy": "Any"
+                            }
+                        ],
+                        "damage": "30",
+                        "description": "Move 1 Energy card attached to the Defending Pokémon to the other Defending Pokémon. (Ignore this effect if your opponent has only 1 Defending Pokémon.)"
+                    }
+                ]
+            }
+        },
+        {
+            "cardName": "Horsea",
+            "cardType": "Pokemon",
+            "info": {
+                "type": "Water",
+                "hp": "50",
+                "stage": "Basic",
+                "evolvesFrom": "None",
+                "weakness": "Lightning",
+                "resistance": "None",
+                "retreat": "1",
+                "moves": [
+                    {
+                        "moveName": "Paralyzing Gaze",
+                        "type": "Attack",
+                        "cost": [
+                            {
+                                "energy": "Any"
+                            }
+                        ],
+                        "damage": "0",
+                        "description": "Flip a coin. If heads, the Defending Pokémon is now Paralyzed. "
+                    },
+                    {
+                        "moveName": "Wave Splash",
+                        "type": "Attack",
+                        "cost": [
+                            {
+                                "energy": "Any"
+                            },
+                            {
+                                "energy": "Any"
+                            }
+                        ],
+                        "damage": "20",
+                        "description": ""
+                    }
+                ]
+            }
+        },
+        {
+            "cardName": "Seadra",
+            "cardType": "Pokemon",
+            "info": {
+                "type": "Water",
+                "hp": "70",
+                "stage": "1",
+                "evolvesFrom": "Horsea",
+                "weakness": "Lightning",
+                "resistance": "None",
+                "retreat": "1",
+                "moves": [
+                    {
+                        "moveName": "Energy Cannon",
+                        "type": "Attack",
+                        "cost": [
+                            {
+                                "energy": "Water"
+                            }
+                        ],
+                        "damage": "20",
+                        "description": "Does 20 damage plus 10 more damage for each Energy attached to Seadra but not used to pay for this attack's Energy cost. You can't add more than 20 damage in this way."
+                    },
+                    {
+                        "moveName": "Water Arrow",
+                        "type": "Attack",
+                        "cost": [
+                            {
+                                "energy": "Water"
+                            },
+                            {
+                                "energy": "Any"
+                            },
+                            {
+                                "energy": "Any"
+                            }
+                        ],
+                        "damage": "0",
+                        "description": "Choose 1 of your opponent's Pokémon. This attack does 30 damage to that Pokémon. (Don't apply Weakness and Resistance for Benched Pokémon.)"
+                    }
+                ]
+            }
+        },
+        {
+            "cardName": "Celio's Network",
+            "cardType": "Trainer",
+            "info": {
+                "trainerType": "Supporter",
+                "description": "Search your deck for a Basic Pokémon or Evolution card (excluding Pokémon-ex), show it to your opponent, and put it into your hand. Shuffle your deck afterward."
+            }
+        },
+        {
+            "cardName": "Life Herb",
+            "cardType": "Trainer",
+            "info": {
+                "trainerType": "Trainer",
+                "description": "Flip a coin. If heads, choose 1 of your Pokémon (excluding Pokémon-ex), and remove all Special Conditions and 6 damage counters from that Pokémon (all if there are less than 6)."
+            }
+        },
+        {
+            "cardName": "Professor Birch",
+            "cardType": "Trainer",
+            "info": {
+                "trainerType": "Supporter",
+                "description": "Draw cards from your deck until you have 6 cards in your hand. "
+            }
+        },
+        {
+            "cardName": "Energy Search",
+            "cardType": "Trainer",
+            "info": {
+                "trainerType": "Trainer",
+                "description": "Search your deck for a basic Energy card and put it into your hand. Shuffle your deck afterward. "
+            }
+        },
+        {
+            "cardName": "Switch",
+            "cardType": "Trainer",
+            "info": {
+                "trainerType": "Trainer",
+                "description": "Switch 1 of your Active Pokémon with 1 of your Benched Pokémon. "
+            }
+        },
+        {
+            "cardName": "Fire Energy",
+            "cardType": "Energy",
+            "info": {
+                "energyType": "Fire"
+            }
+        },
+        {
+            "cardName": "Water Energy",
+            "cardType": "Energy",
+            "info": {
+                "energyType": "Water"
+            }
+        }
+    ]
+}

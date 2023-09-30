@@ -1,0 +1,56 @@
+{
+    "SetName": "Use this json as a reference for setting up card sets",
+    "Cards": [
+        {
+            "cardName": "Pokemon Example",
+            "cardType": "Pokemon",
+            "info": {
+                "type": "Normal",
+                "hp": "0",
+                "stage": "Basic",
+                "evolves from": "None",
+                "weakness": "None",
+                "resistance": "None",
+                "retreat": "0",
+                "moves": [
+                    {
+                        "moveName": "PokePower Example",
+                        "type": "PokePower",
+                        "description": "Card Text Here"
+                    },
+                    {
+                        "moveName": "PokeBody Example",
+                        "type": "PokeBody",
+                        "description": "Card Text Here"
+                    },
+                    {
+                        "moveName": "Attack Example",
+                        "type": "Attack",
+                        "cost": [
+                            {
+                                "energy": "Any"
+                            }
+                        ],
+                        "damage": "0",
+                        "description": "Card Text Here"
+                    }
+                ]
+            }
+        },
+        {
+            "cardName": "Trainer Example",
+            "cardType": "Trainer",
+            "info": {
+                "trainerType": "Trainer/Supporter/Stadium",
+                "description": "Card Text Here"
+            }
+        },
+        {
+            "cardName": "Energy Example",
+            "cardType": "Energy",
+            "info": {
+                "energyType": "Grass"
+            }
+        }
+    ]
+}
