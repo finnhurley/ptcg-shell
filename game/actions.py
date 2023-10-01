@@ -66,7 +66,7 @@ def coinToss():
     else:
         return "Heads"
     
-#knocks out a pokemon, removes all card attached to it from pokemon
+#knocks out a pokemon, removes all cards attached to it from pokemon
 def knockOutPokemon(pokemon, player):
     return
     

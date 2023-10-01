@@ -12,7 +12,7 @@ class Pokemon(Card):
     damageCounters = 0
     moves = []
     energies = []
-    previousStage = []
+    previousStage = None
     
     def __init__(self, name, pokemonInfo):
         pokemonInfo = json.loads(pokemonInfo)
