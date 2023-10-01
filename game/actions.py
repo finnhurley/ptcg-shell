@@ -36,7 +36,7 @@ def setActive(pokemon, player):
 def removeFromActive(pokemon, player):
     if isCardActivePokemon(pokemon) is True:
         for i in range(len(player.active)):
-            if(player.active[i].name == card.name):
+            if(player.active[i].name == pokemon.name):
                 player.active.remove(player.active[i])
                 return pokemon
 
