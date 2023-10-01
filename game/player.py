@@ -59,3 +59,13 @@ class Player:
         for card in self.hand:
             hand += card.name + ", "
         return hand
+    
+    #getter for Active Pokemon, returns card object
+    def activePokemon(self):
+        return self.active[0]
+    
+    #getter for a specified pokemon on the bench, returns card object
+    def benchPokemon(self, pokemonName):
+        for pokemon in self.bench:
+            if (pokemon.name == pokemonName):
+                return pokemon

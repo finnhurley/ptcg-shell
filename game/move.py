@@ -16,6 +16,7 @@ class Attack(Move):
 
 #defines a pokepower, a type of move, every pokepower has a description and action
 class PokePower(Move):
+    usedThisTurn = False
     def __init__(self, moveName, moveType, description, action=print):
         super().__init__(moveType, moveName)
         self.description = description

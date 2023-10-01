@@ -15,6 +15,7 @@ class Pokemon(Card):
     moves = []
     energies = []
     previousStage = None
+    previousCard = None
     
     def __init__(self, name, pokemonInfo):
         pokemonInfo = json.loads(pokemonInfo)
@@ -75,4 +76,10 @@ def convertMoveToFunctionName(pokemonName, moveName):
     funcName = pokemonName.lower()
     moveName = moveName.replace(" ", "")
     funcName += moveName
+    return funcName
+
+#Converts trainer card to a function name to be called from the Trainers folder
+#e.g. Energy Search will return the function name energySearch, which will be called from moves.py
+def convertTrainerToFunctionName(trainerName):
+    funcName = trainerName[0].lower() + trainerName[1:].replace(" ", "")
     return funcName

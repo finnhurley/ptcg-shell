@@ -72,10 +72,14 @@ def isCardActivePokemon(card, player):
 def detachEnergy(energyType, pokemon):
     if energyExists(energyType, pokemon) is True:
         for i in range (len(pokemon.energies)):
-            if (pokemon.energies[i] == energyType):
+            if (pokemon.energies[i].energyType == energyType):
                 energyCard = pokemon.energies[i]
                 pokemon.energies.remove(pokemon.energies[i])
                 return energyCard
+
+#detaches and discards an energy from a target pokemon          
+def discardEnergy(energyType, pokemon, player):
+    toDiscardPile(detachEnergy(energyType, pokemon), player)
 
 #Checks if an energy is attached to a pokemon, returns boolean
 def energyExists(energyType, pokemon):
@@ -98,6 +102,11 @@ def removeCardFromHand(card, player):
             if (player.hand[i].name == card.name):
                 player.hand.remove(player.hand[i])
                 return card
+            
+#removes a card from active pokemon slot
+def removeCardFromActive(card, player):
+    player.active.remove(0)
+    return card
     
 #removes a card from discard pile, returns card object if successful
 def fromDiscardPile(card, player):
@@ -114,9 +123,12 @@ def toDiscardPile(card, player):
 
 #does a check to see if a pokemon has enough damage counters to be knocked out. Returns boolean
 def isKnockedOut(pokemon):
-    if (pokemon.pokemonHp - pokemon.damageCounters <= 0):
+    remainingHp = getRemainingHp(pokemon)
+    if (remainingHp == 0):
+        print("%s has fainted" % pokemon.name)
         return True
     else:
+        print("%s HP: %d/%d" % (pokemon.name, remainingHp, pokemon.pokemonHp))
         return False
 
 #knocks out a pokemon, adds it and all attached cards to the discard pile
@@ -127,11 +139,12 @@ def knockOutPokemon(pokemon, player):
                 discard = player.active[i].name
                 if (discard.previousStage != None):
                     while discard.previousStage != None:
+                        next = discard.previousCard
                         toDiscardPile(discard, player)
-                        discard = discard.previousStage
+                        discard = next
                 for energy in pokemon.energies:
                     toDiscardPile(energy, player)
-                toDiscardPile(pokemon, player)
+                toDiscardPile(removeCardFromActive(discard), player)
 
 #pops the first prize card in the list, returns it as a card object
 def takePrizeCard(player):
@@ -165,11 +178,18 @@ def removeCardFromActive(card, player):
     
 #converts damage to counters and returns the amount of damage counters
 def convertDamageToCounters(damage):
+    if (damage == 0):
+        return 0
     return damage/10
 
 #increments damage counters on a pokemon
 def addDamageCounters(pokemon, amount):
     pokemon.damageCounters += amount
+
+#converts damage to counters and adds them to target pokemon
+def inflictDamage(pokemon, damage):
+    convertDamageToCounters(damage)
+    addDamageCounters(pokemon, damage)
 
 #Poisons a pokemon, sets isPoisoned to true
 def poisonPokemon(pokemon):
@@ -216,3 +236,37 @@ def paralyzePokemon(pokemon):
 #Cures a pokemon's status condition
 def cureStatus(pokemon):
     pokemon.statusCondition = None
+
+#returns the remaining HP for a pokemon
+def getRemainingHp(pokemon):
+    damageCounterToDamage = pokemon.damageCounters * 10
+    remainingHp = pokemon.pokemonHp - damageCounterToDamage
+    if (remainingHp <= 0):
+        return 0
+    else:
+        return damageCounterToDamage
+    
+#checks the defending pokemon's weakness
+def weaknessCheck(attackingPokemon, defendingPokemon):
+    if (attackingPokemon.pokemonType == defendingPokemon.weakness):
+        print("it's super effective!")
+        return True
+    return False
+
+#checks the pokemon's resistance
+def resistanceCheck(attackingPokemon, defendingPokemon):
+    if (attackingPokemon.pokemonType == defendingPokemon.resistance):
+        print("it's not very effective...")
+        return True
+    return False
+
+
+#runs the weakness and resistance checks for a pokemon, returns modified damage as int
+def damageMultiplier(attackingPokemon, defendingPokemon, damage):
+    if (weaknessCheck(attackingPokemon, defendingPokemon) is True):
+            damage = damage * 2
+    if (resistanceCheck(attackingPokemon, defendingPokemon) is True):
+            damage = damage - 30
+            if (damage <= 0):
+                damage = 0
+    return damage
