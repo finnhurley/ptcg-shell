@@ -1,4 +1,5 @@
 import random
+from .card import *
 
 class attack:
     def __init__(self, name, cost, damage, effect):
@@ -30,7 +31,7 @@ def isCardInDiscardPile(card, player):
     return False
 
 #Checks if a specified card exists on a players bench, returns boolean
-def isCardInDiscardPile(card, player):
+def isCardOnBench(card, player):
     for c in player.bench:
         if (c.name == card.name):
             return True
@@ -66,10 +67,6 @@ def coinToss():
     else:
         return "Heads"
     
-#knocks out a pokemon, removes all cards attached to it from pokemon
-def knockOutPokemon(pokemon, player):
-    return
-    
 #removes a specified card from a player's hand, returns card object if successful
 def removeCardFromHand(card, player):
     if (isCardInHand(card, player) is True):
@@ -85,8 +82,113 @@ def fromDiscardPile(card, player):
             if (player.discardPile[i].name == card.name):
                 player.discardPile.remove(player.discardPile[i])
                 return card
-    
 
 #adds a card to the players discard pile
 def toDiscardPile(card, player):
     player.discardPile.append(card)
+
+
+#does a check to see if a pokemon has enough damage counters to be knocked out. Returns boolean
+def isKnockedOut(pokemon):
+    if (pokemon.pokemonHp - pokemon.damageCounters <= 0):
+        return True
+    else:
+        return False
+
+#knocks out a pokemon, adds it and all attached cards to the discard pile
+def knockOutPokemon(pokemon, player):
+    if (isCardActivePokemon(pokemon, player) is True):
+        for i in range(len(player.active)):
+            if (player.active[i].name == pokemon.name):
+                discard = player.active[i].name
+                if (discard.previousStage != None):
+                    while discard.previousStage != None:
+                        toDiscardPile(discard, player)
+                        discard = discard.previousStage
+                for energy in pokemon.energies:
+                    toDiscardPile(energy, player)
+                toDiscardPile(pokemon, player)
+
+#pops the first prize card in the list, returns it as a card object
+def takePrizeCard(player):
+    prizeCard = player.prizeCards.pop(1)
+    return prizeCard
+
+#evolves a target pokemon, appends it as a previousStage to it's evolution, and adds all attached cards/counters to it
+def evolvePokemon(pokemon, evolution, player):
+    if (isCardActivePokemon(pokemon, player) is True):
+        newActive = removeCardFromHand(evolution)
+        for energy in oldActive.energies:
+            newActive.energies.append(detachEnergy(energy, oldActive))
+        newActive.damageCounters = oldActive.damageCounters
+        oldActive.damageCounters = 0
+        oldActive = removeCardFromActive(pokemon)
+        newActive.previousStage = oldActive
+        player.active.append(newActive)
+
+
+#removes a specified card from hand and returns it as a card object
+def removeCardFromHand(card, player):
+    if (isCardInHand(card, player) is True):
+        player.hand.remove(card)
+        return card
+    
+#removes a specified card from an active zone and returns it as a card object
+def removeCardFromActive(card, player):
+    if (isCardActivePokemon(card, player) is True):
+        player.active.remove(card)
+        return card
+    
+#converts damage to counters and returns the amount of damage counters
+def convertDamageToCounters(damage):
+    return damage/10
+
+#increments damage counters on a pokemon
+def addDamageCounters(pokemon, amount):
+    pokemon.damageCounters += amount
+
+#Poisons a pokemon, sets isPoisoned to true
+def poisonPokemon(pokemon):
+    pokemon.isPoisoned = True
+
+#Inflicts poison damage to a pokemon
+def inflictPoisonDamage(pokemon):
+    pokemon.damageCounters += 1
+
+#Burns a pokemon, sets isBurned to true
+def burnPokemon(pokemon):
+    pokemon.isBurned = True
+
+#Inflicts burn damage to a pokemon
+def inflictBurnDamage(pokemon):
+    if (coinToss() == "Heads"):
+        pokemon.damageCounters += 2
+
+#Sends pokemon to sleep, sets statusCondition to Asleep
+def sleepPokemon(pokemon):
+    pokemon.statusCondition = "Asleep"
+
+#Tosses a coin to see if a pokemon should wake up
+def sleepCheck(pokemon):
+    if (coinToss() == "Heads"):
+        pokemon.statusCondition = ""
+        print(pokemon.name, "woke up!")
+    else:
+        print(pokemon.name, "is fast asleep.")
+
+#Confuses the pokemon, sets statusCondition to Confused
+def confusePokemon(pokemon):
+    pokemon.statusCondition = "Confused"
+
+#Tosses a coin to see if a pokemon hurts itself in confusion
+def confuseCheck(pokemon):
+    if (coinToss() == "Tails"):
+        pokemon.damageCounter += 2
+
+#Paralyzes the pokemon, sets statusCondition to Paralyzed
+def paralyzePokemon(pokemon):
+    pokemon.statusCondition = "Paralyzed"
+
+#Cures a pokemon's status condition
+def cureStatus(pokemon):
+    pokemon.statusCondition = None

@@ -37,7 +37,6 @@ class Player:
             self.deck.cards.append(card)
         self.hand.clear()
         
-
     #checks to see if hand has any basic pokemon (used at start of game)
     def isValidHand(self):
         for card in self.hand:

@@ -8,7 +8,9 @@ class Card:
         #self.setId = setId 
 
 class Pokemon(Card):
-    statusCondition = ""
+    isPoisoned = False
+    isBurned = False
+    statusCondition = None
     damageCounters = 0
     moves = []
     energies = []
