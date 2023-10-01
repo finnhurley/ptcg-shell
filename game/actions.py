@@ -16,6 +16,30 @@ def addCardToHand(card, player):
 def attachEnergy(energy, pokemon):
     pokemon.energies.add(energy)
 
+#adds a card to the bench
+def addToBench(pokemon, player):
+    player.bench.append(pokemon)
+
+#removes card from bench, returns card object
+def removeFromBench(card, player):
+    if isCardOnBench(card) is True:
+        for i in range(len(player.bench)):
+            if(player.bench[i].name == card.name):
+                player.bench.remove(player.bench[i])
+                return card
+
+#sets a pokemon as active pokemon
+def setActive(pokemon, player):
+    player.active.append(pokemon)
+
+#removes card from player's active spot, returns card object
+def removeFromActive(pokemon, player):
+    if isCardActivePokemon(pokemon) is True:
+        for i in range(len(player.active)):
+            if(player.active[i].name == card.name):
+                player.active.remove(player.active[i])
+                return pokemon
+
 #Checks if a specified card exists in a players hand, returns boolean
 def isCardInHand(card, player):
     for c in player.hand:

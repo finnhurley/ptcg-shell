@@ -68,3 +68,11 @@ def newPokeBody(bodyInfo):
     type = bodyInfo["type"]
     description = bodyInfo["description"]
     return PokePower(name, type, description)
+
+#Converts pokemon move to a function name to be called from the PokemonMoves folder
+#e.g. Pikachu's Thunder Jolt will return the function name pikachuThunderJolt, which would be called from moves.py
+def convertMoveToFunctionName(pokemonName, moveName):
+    funcName = pokemonName.lower()
+    moveName = moveName.replace(" ", "")
+    funcName += moveName
+    return funcName
