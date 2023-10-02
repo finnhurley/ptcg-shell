@@ -102,7 +102,7 @@
                             }
                         ],
                         "damage": "10",
-                        "description": "None"
+                        "description": ""
                     },
                     {
                         "moveName": "Fireworks",

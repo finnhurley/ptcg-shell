@@ -1,0 +1,85 @@
+{
+    "SetName": "Ex Master Trainer - Blaziken Deck",
+    "Cards": [
+        {
+            "cardName": "Blaziken",
+            "cardType": "Pokemon",
+            "info": {
+                "type": "Fire",
+                "hp": "150",
+                "stage": "2",
+                "evolvesFrom": "Combusken",
+                "weakness": "Water",
+                "resistance": "None",
+                "retreat": "2",
+                "moves": [
+                    {
+                        "moveName": "Firestarter",
+                        "type": "PokePower",
+                        "description": "Once during your turn (before your attack), you may attach a Fire Energy card from your discard pile to 1 of your Benched Pokémon. This power can't be used if Blaziken is affected by a Special Condition."
+                    },
+                    {
+                        "moveName": "Fire Stream",
+                        "type": "Attack",
+                        "cost": [
+                            {
+                                "energy": "Fire"
+                            },
+                            {
+                                "energy": "Any"
+                            },
+                            {
+                                "energy": "Any"
+                            }
+                        ],
+                        "damage": "50",
+                        "description": "Discard a Fire Energy card attached to Blaziken. If you do, this attack does 10 damage to each of your opponent's Benched Pokémon. (Don't apply Weakness and Resistance for Benched Pokémon)"
+                    }
+                ]
+            }
+        },
+        {
+            "cardName": "Combusken",
+            "cardType": "Pokemon",
+            "info": {
+                "type": "Fire",
+                "hp": "70",
+                "stage": "1",
+                "evolvesFrom": "Torchic",
+                "weakness": "Water",
+                "resistance": "None",
+                "retreat": "1",
+                "moves": [
+                    {
+                        "moveName": "Flare",
+                        "type": "Attack",
+                        "cost": [
+                            {
+                                "energy": "Fire"
+                            }
+                        ],
+                        "damage": "20",
+                        "description": "None"
+                    },
+                    {
+                        "moveName": "Double Kick",
+                        "type": "Attack",
+                        "cost": [
+                            {
+                                "energy": "Any"
+                            },
+                            {
+                                "energy": "Any"
+                            },
+                            {
+                                "energy": "Any"
+                            }
+                        ],
+                        "damage": "40",
+                        "description": "Flip 2 coins. This attack does 40 damage times the number of heads."
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -14,13 +14,22 @@ class Attack(Move):
         self.description = description
         self.action = action
 
+    def printMove(self):
+        print("%s (cost:" % self.moveName, self.cost, ")")
+        print("%s" % self.description)
+        print("%s" % self.damage)
+
 #defines a pokepower, a type of move, every pokepower has a description and action
 class PokePower(Move):
     usedThisTurn = False
     def __init__(self, moveName, moveType, description, action=print):
-        super().__init__(moveType, moveName)
+        super().__init__(moveName, moveType)
         self.description = description
         self.action = action
+
+    def printMove(self):
+        print("PokePower: %s" % self.moveName)
+        print("%s" % self.description)
 
 #defines a pokebody, a type of move, every pokebody as a description and action
 class PokeBody(Move):
@@ -28,3 +37,7 @@ class PokeBody(Move):
         super().__init__(moveType, moveName)
         self.description = description
         self.action = action
+
+    def printMove(self):
+        print("PokeBody: %s" % self.moveName)
+        print("%s" % self.description)

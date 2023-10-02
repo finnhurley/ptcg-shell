@@ -1,0 +1,14 @@
+{
+    "Deck": [
+        {
+            "cardName": "Blaziken",
+            "Set": "BlazikenCard.json",
+            "quantity": "2"
+        },
+        {
+            "cardName": "Combusken",
+            "Set": "BlazikenCard.json",
+            "quantity": "1"
+        }
+    ]
+}

@@ -13,7 +13,6 @@ def createRecipe(deckListPath):
             continue
         for j in range(int(i["quantity"])):
             recipe.append(createCard(i))
-    
     return recipe
 
 #checks to see if a card exists in the corrensponding cardinfo json, returns boolean
@@ -36,7 +35,6 @@ def createCard(cardData):
     for card in data["Cards"]:
         if (card["cardName"]==cardData["cardName"]):
             break
-    
     if(card["cardType"] == "Pokemon"):
         return createPokemon(card)
     if(card["cardType"] == "Trainer"):

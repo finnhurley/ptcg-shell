@@ -8,16 +8,15 @@ class Card:
         #self.setId = setId 
 
 class Pokemon(Card):
-    isPoisoned = False
-    isBurned = False
-    statusCondition = None
-    damageCounters = 0
-    moves = []
-    energies = []
-    previousStage = None
-    previousCard = None
-    
     def __init__(self, name, pokemonInfo):
+        self.isPoisoned = False
+        self.isBurned = False
+        self.statusCondition = None
+        self.damageCounters = 0
+        self.moves = []
+        self.energies = []
+        self.previousStage = None
+        self.previousCard = None
         pokemonInfo = json.loads(pokemonInfo)
         info = pokemonInfo["info"]
         super().__init__(name)
@@ -36,6 +35,21 @@ class Pokemon(Card):
                 self.moves.append(newPokePower(move))
             if move["type"] == "PokeBody":
                 self.moves.append(newPokeBody(move))
+    
+    def viewCard(self):
+        print("----------")
+        print("%s\n%sHP\nType: %s" % (self.name, self.pokemonHp, self.pokemonType))
+        print("Stage: %s" % self.stage)
+        if (self.stage != "Basic"):
+            print("Evolves from %s" % self.evolvesFrom)
+        print("----------")
+        for i in range(len(self.moves)):
+            print("Move %s:" % str(i+1))
+            self.moves[i].printMove()
+            print("----------")
+        print("weakness: %s" % self.weaknessType)
+        print("resistance: %s" % self.resistanceType)
+        print("retreat cost: %s\n----------" % self.retreatCost)
                 
 class Trainer(Card):
     def __init__(self, name, trainerInfo):

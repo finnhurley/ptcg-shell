@@ -11,3 +11,7 @@ p1 = Player("Player 1", blazikenDeck)
 p1.setUpBoard()
 print("Prize Cards:", len(p1.prizes))
 print(p1.showHand())
+
+for card in p1.hand:
+    if ("Pokemon" in str(type(card))):
+        card.viewCard()
