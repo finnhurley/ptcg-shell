@@ -37,7 +37,7 @@ class Pokemon(Card):
                 self.moves.append(newPokeBody(move))
     
     def viewCard(self):
-        print("----------")
+        print("==========")
         print("%s\n%sHP\nType: %s" % (self.name, self.pokemonHp, self.pokemonType))
         print("Stage: %s" % self.stage)
         if (self.stage != "Basic"):
@@ -49,7 +49,7 @@ class Pokemon(Card):
             print("----------")
         print("weakness: %s" % self.weaknessType)
         print("resistance: %s" % self.resistanceType)
-        print("retreat cost: %s\n----------" % self.retreatCost)
+        print("retreat cost: %s\n==========" % self.retreatCost)
                 
 class Trainer(Card):
     def __init__(self, name, trainerInfo):

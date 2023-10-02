@@ -1,5 +1,6 @@
 import random
 from .card import *
+from .player import *
 
 class attack:
     def __init__(self, name, cost, damage, effect):
@@ -270,3 +271,21 @@ def damageMultiplier(attackingPokemon, defendingPokemon, damage):
             if (damage <= 0):
                 damage = 0
     return damage
+
+#displays all the players active and benched pokemon, awaits a number input and returns the corresponding card object
+def selectOwnPokemon(player):
+    cardList = []
+    cardList.append(player.activePokemon())
+    optionNo = 1
+    print("%d. %s (Active)" % (optionNo, player.activePokemon().name))
+    for card in player.bench:
+        optionNo += 1
+        cardList.append(card)
+        print("%d. %s (Bench)" % (optionNo, card.name))
+    while True:
+        option = input("\nselect a pokemon by corresponding number:")
+        try:
+            selectedNo = int(option)-1
+            return cardList[selectedNo]
+        except:
+            print("error: please select a number")

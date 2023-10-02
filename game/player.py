@@ -69,3 +69,10 @@ class Player:
         for pokemon in self.bench:
             if (pokemon.name == pokemonName):
                 return pokemon
+    
+    #returns a string array of pokemon names on the players bench
+    def showBenchedPokemon(self):
+        nameList = []
+        for pokemon in self.bench:
+            nameList.append(pokemon.name)
+        return nameList
