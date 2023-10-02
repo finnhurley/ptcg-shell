@@ -342,3 +342,37 @@ def selectOpponentsBenchedPokemon(opponent):
             return cardList[selectedNo]
         except:
             print("error: please select a number")
+
+#Executes a pokemons attack if it has enough energy to use the move, returns boolean if successful
+def useAttack(pokemon, move, player, opponent):
+    pokemonEnergies = []
+    for energy in pokemon.energies:
+        pokemonEnergies.append(energy.name)
+    if(all(e in move.cost for e in pokemonEnergies)):
+        for m in pokemon.moves:
+            if (m.name == move.moveName):
+                m.action(player, opponent)
+                return True
+    else:
+        print("Error: %s doesn't enough enough energy to use %s." % pokemon.name, move.moveName)
+        return False
+
+#Executes a pokemon's pokepower if it hasnt been used this turn, returns boolean if successful
+def usePokePower(pokemon, power, player, opponent):
+    if (pokemon.pokePowerFlag is False):
+        for m in pokemon.moves:
+            if (m.moveType == "PokePower" and m.moveName == power.Name):
+                m.action(pokemon, power, player, opponent)
+                pokemon.pokePowerFlag = True
+                return True
+    else:
+        print("Error: %s's %s has already been used this turn" % pokemon.name, power.moveName)
+        return False
+
+#resets all pokePowerFlag instances that were set to True, called at the end of a player's turn
+def resetPokePowerFlags(player):
+    if (player.activePokemon().pokePowerFlag is True):
+        player.activePokemon().pokePowerFlag = False
+    for card in player.bench:
+        if(card.pokePowerFlag is True):
+            card.pokePowerFlag = False

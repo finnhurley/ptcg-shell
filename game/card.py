@@ -9,6 +9,7 @@ class Card:
 
 class Pokemon(Card):
     def __init__(self, name, pokemonInfo):
+        self.pokePowerFlag = False
         self.isPoisoned = False
         self.isBurned = False
         self.statusCondition = None
