@@ -105,14 +105,10 @@ def goldeenFlail(player, opponent):
         inflictDamage(defendingPokemon, damage)
 
 #Seaking (ex Ruby and Sapphire) Water Arrow
-#TODO: implement selectOpponentsPokemon() function in action.py
 def seakingWaterArrow(player, opponent):
     if (player.activePokemon().name == "Seaking"):
-        pkmn = player.activePokemon()
-        defendingPokemon = opponent.activePokemon()
-        damage = 0
-        damage = damageMultiplier(pkmn, defendingPokemon, damage)
-        inflictDamage(defendingPokemon, damage)
+        defendingPokemon = selectOpponentsPokemon(opponent)
+        inflictDamage(defendingPokemon, 30)
 
 #Seaking (ex Ruby and Sapphire) Fast Stream
 def seakingFastStream(player, opponent):
@@ -153,11 +149,7 @@ def seadraEnergyCannon(player, opponent):
         inflictDamage(defendingPokemon, damage)
 
 #Seadra (ex Dragon) Water Arrow
-#TODO: implement selectOpponentsPokemon() function in action.py
 def seadraWaterArrow(player, opponent):
     if (player.activePokemon().name == "Seadra"):
-        pkmn = player.activePokemon()
-        defendingPokemon = opponent.activePokemon()
-        damage = 0
-        damage = damageMultiplier(pkmn, defendingPokemon, damage)
-        inflictDamage(defendingPokemon, damage)
+        defendingPokemon = selectOpponentsPokemon(opponent)
+        inflictDamage(defendingPokemon, 30)

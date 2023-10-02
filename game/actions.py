@@ -289,3 +289,56 @@ def selectOwnPokemon(player):
             return cardList[selectedNo]
         except:
             print("error: please select a number")
+
+#displays all the players benched pokemon, awaits a number input and returns the corresponding card object
+def selectOwnBenchedPokemon(player):
+    cardList = []
+    optionNo = 0
+    print("%d. %s (Active)" % (optionNo, player.activePokemon().name))
+    for card in player.bench:
+        optionNo += 1
+        cardList.append(card)
+        print("%d. %s (Bench)" % (optionNo, card.name))
+    while True:
+        option = input("\nselect a pokemon by corresponding number:")
+        try:
+            selectedNo = int(option)-1
+            return cardList[selectedNo]
+        except:
+            print("error: please select a number")
+
+#displays all the opponent's active and benched pokemon, awaits a number input and returns the corresponding card object
+def selectOpponentsPokemon(opponent):
+    cardList = []
+    cardList.append(opponent.activePokemon())
+    optionNo = 1
+    print("%d. %s (Active)" % (optionNo, opponent.activePokemon().name))
+    for card in opponent.bench:
+        optionNo += 1
+        cardList.append(card)
+        print("%d. %s (Bench)" % (optionNo, card.name))
+    while True:
+        option = input("\nselect a pokemon by corresponding number:")
+        try:
+            selectedNo = int(option)-1
+            return cardList[selectedNo]
+        except:
+            print("error: please select a number")
+
+
+#displays all the opponent's benched pokemon, awaits a number input and returns the corresponding card object
+def selectOpponentsBenchedPokemon(opponent):
+    cardList = []
+    optionNo = 0
+    print("%d. %s (Active)" % (optionNo, opponent.activePokemon().name))
+    for card in opponent.bench:
+        optionNo += 1
+        cardList.append(card)
+        print("%d. %s (Bench)" % (optionNo, card.name))
+    while True:
+        option = input("\nselect a pokemon by corresponding number:")
+        try:
+            selectedNo = int(option)-1
+            return cardList[selectedNo]
+        except:
+            print("error: please select a number")
