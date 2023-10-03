@@ -28,3 +28,7 @@ def energySearch(player):
     player.hand.append(selectEnergyFromDeck(player))
 
 #Switch (EX Ruby and Sapphire)
+def switch(player):
+    active = player.activePokemon()
+    benched = selectOwnBenchedPokemon(player)
+    active, benched = benched, active
