@@ -1,4 +1,5 @@
 import random
+import traceback
 from .card import *
 from .player import *
 
@@ -376,3 +377,24 @@ def resetPokePowerFlags(player):
     for card in player.bench:
         if(card.pokePowerFlag is True):
             card.pokePowerFlag = False
+
+#lists all pokemon in the players deck, player selects number of corresponding pokemon, returns card object
+def selectPokemonFromDeck(player):
+    cardList = []
+    optionNo = 0
+    for card in player.deck.cards:
+        if ("Pokemon" in str(type(card))):
+            optionNo += 1
+            cardList.append(card)
+            print("%d. %s: %s" % (optionNo, card.name, card.stage))
+    while True:
+        option = input("\nselect a pokemon by corresponding number:")
+        try:
+            i = int(option)-1
+            card = cardList[i]
+            player.deck.cards.remove(cardList[i])
+            player.deck.shuffle()
+            return card
+        except:
+            traceback.print_exc()
+            print("error: please select a number")

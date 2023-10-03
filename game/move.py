@@ -1,3 +1,8 @@
+from .PokemonMoves.attacks import *
+from .PokemonMoves.pokebodies import *
+from .PokemonMoves.pokepowers import *
+
+
 #defines a move to be used by a pokemon, every move has a name and type
 class Move:
     def __init__(self, moveName, moveType):
@@ -41,3 +46,9 @@ class PokeBody(Move):
     def printMove(self):
         print("PokeBody: %s" % self.moveName)
         print("%s" % self.description)
+
+#returns the function for the corresponding moveName, returns function in uncalled state
+def getFunctionNameAsString(pokemonName, moveName):
+    functionName = pokemonName.lower()
+    functionName += moveName.replace(" ", "")
+    print(functionName)

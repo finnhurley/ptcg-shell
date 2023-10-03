@@ -2,16 +2,17 @@ from .deck import *
 from .card import *
 
 class Player:
-    prizes = []
-    hand = []
-    active = []
-    bench = []
-    discardPile = []
 
     #Constructor takes a player name and a deck to use
     def __init__(self, name, deck):
         self.name = name
-        self.deck = deck        
+        self.deck = deck
+        self.prizes = []
+        self.hand = []
+        self.active = []
+        self.bench = []
+        self.discardPile = []
+        self.supporterFlag = False
 
     #Shuffles the player's deck, sets up prize cards and hand
     def setUpBoard(self):
