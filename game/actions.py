@@ -398,3 +398,24 @@ def selectPokemonFromDeck(player):
         except:
             traceback.print_exc()
             print("error: please select a number")
+
+#lists all pokemon in the players deck, player selects number of corresponding pokemon, returns card object
+def selectEnergyFromDeck(player):
+    cardList = []
+    optionNo = 0
+    for card in player.deck.cards:
+        if ("Energy" in str(type(card))):
+            optionNo += 1
+            cardList.append(card)
+            print("%d. %s" % (optionNo, card.name))
+    while True:
+        option = input("\nselect an energy by corresponding number:")
+        try:
+            i = int(option)-1
+            card = cardList[i]
+            player.deck.cards.remove(cardList[i])
+            player.deck.shuffle()
+            return card
+        except:
+            traceback.print_exc()
+            print("error: please select a number")
