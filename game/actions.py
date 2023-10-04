@@ -256,14 +256,14 @@ def getRemainingHp(pokemon):
     
 #checks the defending pokemon's weakness
 def weaknessCheck(attackingPokemon, defendingPokemon):
-    if (attackingPokemon.pokemonType == defendingPokemon.weakness):
+    if (attackingPokemon.pokemonType == defendingPokemon.weaknessType):
         print("it's super effective!")
         return True
     return False
 
 #checks the pokemon's resistance
 def resistanceCheck(attackingPokemon, defendingPokemon):
-    if (attackingPokemon.pokemonType == defendingPokemon.resistance):
+    if (attackingPokemon.pokemonType == defendingPokemon.resistanceType):
         print("it's not very effective...")
         return True
     return False

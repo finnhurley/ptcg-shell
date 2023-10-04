@@ -26,8 +26,8 @@ def blazikenFireStream(player, opponent):
         inflictDamage(defendingPokemon, damage)
         
 
-#Combusken (ex Dragon) Quick Attack
-def combuskenQuickAttack(player, opponent):
+#Combusken (ex Dragon) Flare
+def combuskenFlare(player, opponent):
     if (player.activePokemon().name == "Combusken"):
         pkmn = player.activePokemon()
         defendingPokemon = opponent.activePokemon()
@@ -37,8 +37,8 @@ def combuskenQuickAttack(player, opponent):
         damage = damageMultiplier(pkmn, defendingPokemon, damage)
         inflictDamage(defendingPokemon, damage)
 
-#Combusken (ex Dragon) Combustion
-def combuskenCombustion(player, opponent):
+#Combusken (ex Dragon) Double Kick
+def combuskenDoubleKick(player, opponent):
     if (player.activePokemon().name == "Combusken"):
         pkmn = player.activePokemon()
         defendingPokemon = opponent.activePokemon()
@@ -75,6 +75,15 @@ def numelFirebreathing(player, opponent):
         damage = 10
         if (coinToss == "Heads"):
             damage += 10
+        damage = damageMultiplier(pkmn, defendingPokemon, damage)
+        inflictDamage(defendingPokemon, damage)
+
+#Numel (ex Dragon) Tackle
+def numelTackle(player, opponent):
+    if (player.activePokemon().name == "Numel"):
+        pkmn = player.activePokemon()
+        defendingPokemon = opponent.activePokemon()
+        damage = 20
         damage = damageMultiplier(pkmn, defendingPokemon, damage)
         inflictDamage(defendingPokemon, damage)
 

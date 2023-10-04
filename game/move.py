@@ -1,7 +1,4 @@
-from .PokemonMoves.attacks import *
-from .PokemonMoves.pokebodies import *
-from .PokemonMoves.pokepowers import *
-
+from . import Moves
 
 #defines a move to be used by a pokemon, every move has a name and type
 class Move:
@@ -12,7 +9,7 @@ class Move:
 #defines an attack, a type of move, every attack has a cost, damage amount, description of the move and action
 class Attack(Move):
     cost = []
-    def __init__(self, moveName, moveType, cost, damage, description, action=print):
+    def __init__(self, moveName, moveType, cost, damage, description, action):
         super().__init__(moveName, moveType)
         self.cost = cost
         self.damage = damage
@@ -27,7 +24,7 @@ class Attack(Move):
 #defines a pokepower, a type of move, every pokepower has a description and action
 class PokePower(Move):
     usedThisTurn = False
-    def __init__(self, moveName, moveType, description, action=print):
+    def __init__(self, moveName, moveType, description, action):
         super().__init__(moveName, moveType)
         self.description = description
         self.action = action
@@ -38,7 +35,7 @@ class PokePower(Move):
 
 #defines a pokebody, a type of move, every pokebody as a description and action
 class PokeBody(Move):
-    def __init__(self, moveName, moveType, description, action=print):
+    def __init__(self, moveName, moveType, description, action):
         super().__init__(moveType, moveName)
         self.description = description
         self.action = action

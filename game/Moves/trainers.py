@@ -1,6 +1,6 @@
 import sys
-sys.path.append('')
-from actions import *
+sys.path.append('..')
+from ..actions import *
 
 #Celio's Network (EX Fire Red and Leaf Green)
 def celiosNetwork(player):

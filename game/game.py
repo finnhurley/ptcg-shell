@@ -123,14 +123,14 @@ class Game:
             print("Remaining HP: %d (%d Damage Counters)" % (poke.getRemainingHP(), poke.damageCounters))
             print("\nWhat will %s do?" % poke.name)
             playerMove = input("\n1. Attack    2. Retreat    3. Back    : ")
-            self.refreshScreen()
             if (playerMove == "1"):
-                print("\n attacks coming soon!")
+                self.chooseAttack(poke, player, opponent)
             if (playerMove == "2"):
                 if (poke.canRetreat()):
                     print("\n%s return!" % poke.name)
                     return
                 else:
+                    self.refreshScreen()
                     print("\n%s can't retreat! Not enough energies.\n" % poke.name)
             if (playerMove == "3"):
                 return
@@ -156,6 +156,40 @@ class Game:
             sleepCheck(player.activePokemon())
         if (player.activePokemon().statusCondition == "Paralyzed"):
             cureStatus(player.activePokemon())
+
+        #Returns True if a pokemon has enough energies
+    def energyCheck(self, pokemon, move):
+        pokemonEnergies = []
+        for energy in pokemon.energies:
+            pokemonEnergies.append(energy.name)
+        if (len(pokemonEnergies) == 0):
+            return False
+        if (set(pokemonEnergies).issubset(move.cost) or set(move.cost).issubset(pokemonEnergies)):
+            return True
+        else:
+            return False
+
+    def chooseAttack(self, pokemon, player, opponent):
+        decideAttack = True
+        while decideAttack:
+            optionNo = 0
+            for move in pokemon.moves:
+                optionNo +=1
+                print("%d. %s" % (optionNo, move.moveName))
+            optionNo += 1
+            print("%d. Cancel" % optionNo)
+            option = input("Select Attack: ")
+            optionInt = int(option) - 1
+            if (optionInt in range(len(pokemon.moves))):
+                selectedMove = pokemon.moves[int(optionInt)]
+                if (self.energyCheck(pokemon, move)):
+                    selectedMove.action(player, opponent)
+                    decideAttack = False
+                else:
+                    self.refreshScreen()
+                    print("%s doesn't have enough energy to perform %s!" % (pokemon.name, selectedMove.moveName))
+            if (int(option) == optionNo):
+                decideAttack = False
 
     def refreshScreen(self):
         os.system('cls||clear')
