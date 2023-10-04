@@ -1,7 +1,7 @@
 import sys
 import os
 sys.path.append('..')
-from actions import *
+from ..actions import *
 
 #template to copy+paste for each new move
 def pokemonAttack(player, opponent):

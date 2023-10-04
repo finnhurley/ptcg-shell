@@ -184,6 +184,12 @@ def convertDamageToCounters(damage):
         return 0
     return damage/10
 
+#converts counters to damage and returns the amount of damage
+def convertCountersToDamage(counters):
+    if (counters == 0):
+        return 0
+    return counters * 10
+
 #increments damage counters on a pokemon
 def addDamageCounters(pokemon, amount):
     pokemon.damageCounters += amount
@@ -308,6 +314,26 @@ def selectOwnBenchedPokemon(player):
         except:
             print("error: please select a number")
 
+#displays all basic pokemon in the players hand, awaits number input and sets that pokemon as active
+def selectStartingActivePokemon(player):
+    cardList = []
+    optionNo = 0
+    for card in player.hand:
+        if ("Pokemon" in str(type(card))):
+            if (card.stage == "Basic"):
+                optionNo += 1
+                cardList.append(card)
+                print("%d. %s" % (optionNo, card.name))
+    while True:
+        option = input("\n%s: Select the number of your starting active pokemon" % player.name)
+        try:
+            selectedNo = int(option)-1
+            player.active.append(removeCardFromHand(cardList[selectedNo], player))
+            return
+        except:
+            traceback.print_exc()
+            print("error: please select a number")
+
 #displays all the opponent's active and benched pokemon, awaits a number input and returns the corresponding card object
 def selectOpponentsPokemon(opponent):
     cardList = []
@@ -331,7 +357,6 @@ def selectOpponentsPokemon(opponent):
 def selectOpponentsBenchedPokemon(opponent):
     cardList = []
     optionNo = 0
-    print("%d. %s (Active)" % (optionNo, opponent.activePokemon().name))
     for card in opponent.bench:
         optionNo += 1
         cardList.append(card)
@@ -419,3 +444,10 @@ def selectEnergyFromDeck(player):
         except:
             traceback.print_exc()
             print("error: please select a number")
+    
+#Lists all pokemon in the hand
+def viewHand(player):
+    optionNo = 0
+    for card in player.hand:
+        optionNo
+        print("%d. %s" % (optionNo, card.name))

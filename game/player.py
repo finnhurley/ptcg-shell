@@ -24,7 +24,6 @@ class Player:
         for i in range(7):
             self.hand.append(self.deck.drawCard())
 
-        mullyCount = 0
         validHand = self.isValidHand()
         if validHand is False:
             while validHand is False:

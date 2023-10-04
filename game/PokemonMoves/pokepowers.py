@@ -1,8 +1,8 @@
 import sys 
 sys.path.append('..')
 
-from card import *
-from actions import *
+from ..card import *
+from ..actions import *
 
 #Blaziken (ex Ruby and Sapphire) Firestarter
 def blazikenFirestarter(player):

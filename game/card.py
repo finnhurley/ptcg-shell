@@ -1,4 +1,5 @@
 from .move import *
+from .actions import *
 import json
 
 class Card:
@@ -51,6 +52,11 @@ class Pokemon(Card):
         print("weakness: %s" % self.weaknessType)
         print("resistance: %s" % self.resistanceType)
         print("retreat cost: %s\n==========" % self.retreatCost)
+
+    def getRemainingHP(self):
+        dmg = convertCountersToDamage(self.damageCounters)
+        return self.pokemonHp - dmg
+        
                 
 class Trainer(Card):
     def __init__(self, name, trainerInfo):
