@@ -1,10 +1,9 @@
 import random
 
 class Deck:
-    cards = []
-
     #Deck constructor takes a deck name and a recipe (a list of Card classes)
     def __init__(self, name, recipe):
+        self.cards = []
         self.name = name
         for pkmncard in recipe:
             self.addCard(pkmncard)

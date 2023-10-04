@@ -6,10 +6,11 @@ class Card:
     def __init__(self, name):
         self.name = name
         #self.setName = setName
-        #self.setId = setId 
+        #self.setId = setId
 
 class Pokemon(Card):
     def __init__(self, name, pokemonInfo):
+        self.cardType = "Pokemon"
         self.pokePowerFlag = False
         self.isPoisoned = False
         self.isBurned = False
@@ -55,19 +56,38 @@ class Pokemon(Card):
 
     def getRemainingHP(self):
         dmg = convertCountersToDamage(self.damageCounters)
-        return self.pokemonHp - dmg
+        return (int(self.pokemonHp) - dmg)
+    
+    def canRetreat(self):
+        return True if (len(self.energies) >= int(self.retreatCost)) else False
+        
         
                 
 class Trainer(Card):
     def __init__(self, name, trainerInfo):
         super().__init__(name)
-        self.trainerType = trainerInfo["trainerType"]
+        self.cardType = trainerInfo["trainerType"]
         self.effect = trainerInfo["description"]
+
+    def viewCard(self):
+        print("==========")
+        print("[%s] %s\n" % (self.cardType, self.name))
+        if(self.cardType == "Supporter"):
+            print("----------")
+            print("You can only use 1 Supporter Card Per Turn")
+        print("----------")
+        print("%s" % self.effect)
+        print("==========")
 
 class Energy(Card):
     def __init__(self, name, energyInfo):
         super().__init__(name)
+        self.cardType = "Energy"
         self.energyType = energyInfo["energyType"]
+    def viewCard(self):
+        print("==========")
+        print("[%s] %s\n" % (self.cardType, self.name))
+        print("Attach this card to any pokemon to provide 1 %s." % self.name)
 
 def newAttack(attackInfo):
     name = attackInfo["moveName"]
