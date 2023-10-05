@@ -411,4 +411,3 @@ class Game:
             print("%s is the winner!!" % self.winner.name)
             option = input("Enter any key to continue: ")
             return
-

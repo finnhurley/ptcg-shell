@@ -43,7 +43,17 @@ class Pokemon(Card):
                 self.moves.append(newPokePower(self.name, move))
             if move["type"] == "PokeBody":
                 self.moves.append(newPokeBody(self.name, move))
+
+    #Checks to see if a pokemon has enough energy to retreat, returns boolean
+    def canRetreat(self):
+        return True if (len(self.energies) >= int(self.retreatCost)) else False
+
+    #Calculates and prints the remaining HP for a pokemon
+    def getRemainingHP(self):
+        dmg = convertCountersToDamage(self.damageCounters)
+        return (int(self.pokemonHp) - dmg)
     
+    #Prints the contents of the pokemon card
     def viewCard(self):
         print("==========")
         print("%s\n%sHP\nType: %s" % (self.name, self.pokemonHp, self.pokemonType))
@@ -58,15 +68,6 @@ class Pokemon(Card):
         print("weakness: %s" % self.weaknessType)
         print("resistance: %s" % self.resistanceType)
         print("retreat cost: %s\n==========" % self.retreatCost)
-
-    def getRemainingHP(self):
-        dmg = convertCountersToDamage(self.damageCounters)
-        return (int(self.pokemonHp) - dmg)
-    
-    def canRetreat(self):
-        return True if (len(self.energies) >= int(self.retreatCost)) else False
-        
-        
                 
 class Trainer(Card):
     def __init__(self, name, trainerInfo):
@@ -75,6 +76,7 @@ class Trainer(Card):
         self.effect = trainerInfo["description"]
         self.action = getTrainerFunction(name)
 
+    #Prints the contents of a trainer card
     def viewCard(self):
         print("==========")
         print("[%s] %s\n" % (self.cardType, self.name))
@@ -90,35 +92,12 @@ class Energy(Card):
         super().__init__(name)
         self.cardType = "Energy"
         self.energyType = energyInfo["energyType"]
+
+    #Prints the contents of an energy card
     def viewCard(self):
         print("==========")
         print("[%s] %s\n" % (self.cardType, self.name))
         print("Attach this card to any pokemon to provide 1 %s." % self.name)
-
-def newAttack(pokemonName, attackInfo):
-    name = attackInfo["moveName"]
-    type = attackInfo["type"]
-    atkCost = []
-    for energy in attackInfo["cost"]:
-        atkCost.append(energy["energy"])
-    damage = attackInfo["damage"]
-    description = attackInfo["description"]
-    action = getAttackFunction(pokemonName, name)
-    return Attack(name, type, atkCost, damage, description, action)
-
-def newPokePower(pokemonName, powerInfo):
-    name = powerInfo["moveName"]
-    type = powerInfo["type"]
-    description = powerInfo["description"]
-    action = getPokePowerFunction(pokemonName, name)
-    return PokePower(name, type, description, action)
-
-def newPokeBody(pokemonName, bodyInfo):
-    name = bodyInfo["moveName"]
-    type = bodyInfo["type"]
-    description = bodyInfo["description"]
-    action = getPokeBodyFunction(pokemonName, name)
-    return PokePower(name, type, description, action)
 
 #Converts pokemon move to a function name to be called from the PokemonMoves folder
 #e.g. Pikachu's Thunder Jolt will return the function name pikachuThunderJolt, which would be called from moves.py
@@ -134,22 +113,54 @@ def convertTrainerToFunctionName(trainerName):
     funcName = trainerName[0].lower() + trainerName[1:].replace(" ", "")
     return funcName
 
+#Retrieves the specified attack function for a pokemon's move
 def getAttackFunction(pokemonName, moveName):
     functionName = convertMoveToFunctionName(pokemonName, moveName)
     move = getattr(Moves.attacks, functionName)
     return move
 
-def getPokePowerFunction(pokemonName, moveName):
-    functionName = convertMoveToFunctionName(pokemonName, moveName)
-    move = getattr(Moves.pokepowers, functionName)
-    return move
-
+#Retrieves the specified pokebody function for a pokemon's pokebody
 def getPokeBodyFunction(pokemonName, moveName):
     functionName = convertMoveToFunctionName(pokemonName, moveName)
     move = getattr(Moves.pokebodies, functionName)
     return move
 
+#Retrieves the specified pokepower function for a pokemon's pokepower
+def getPokePowerFunction(pokemonName, moveName):
+    functionName = convertMoveToFunctionName(pokemonName, moveName)
+    move = getattr(Moves.pokepowers, functionName)
+    return move
+
+#Retrieves the specified trainer function for a trainer card
 def getTrainerFunction(moveName):
     functionName = convertTrainerToFunctionName(moveName)
     move = getattr(Moves.trainers, functionName)
     return move
+
+#Creates a new attack for a pokemon
+def newAttack(pokemonName, attackInfo):
+    name = attackInfo["moveName"]
+    type = attackInfo["type"]
+    atkCost = []
+    for energy in attackInfo["cost"]:
+        atkCost.append(energy["energy"])
+    damage = attackInfo["damage"]
+    description = attackInfo["description"]
+    action = getAttackFunction(pokemonName, name)
+    return Attack(name, type, atkCost, damage, description, action)
+
+#Creates a new PokeBody for a pokemon
+def newPokeBody(pokemonName, bodyInfo):
+    name = bodyInfo["moveName"]
+    type = bodyInfo["type"]
+    description = bodyInfo["description"]
+    action = getPokeBodyFunction(pokemonName, name)
+    return PokePower(name, type, description, action)
+
+#Creates a new PokePower for a pokemon
+def newPokePower(pokemonName, powerInfo):
+    name = powerInfo["moveName"]
+    type = powerInfo["type"]
+    description = powerInfo["description"]
+    action = getPokePowerFunction(pokemonName, name)
+    return PokePower(name, type, description, action)
