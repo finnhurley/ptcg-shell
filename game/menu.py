@@ -88,7 +88,7 @@ class Menu:
                 viewingAbout = False
 
     def resetWinner(self):
-        print("%s is the winner!\n" % self.g.winner)
+        print("%s is the winner!\n" % self.g.winner.name)
         self.g.winner = None
 
 

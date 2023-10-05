@@ -1,5 +1,6 @@
 import random
 import traceback
+import os
 from .card import *
 from .player import *
 
@@ -316,6 +317,8 @@ def selectOwnBenchedPokemon(player):
 
 #displays all basic pokemon in the players hand, awaits number input and sets that pokemon as active
 def selectStartingActivePokemon(player):
+    refreshScreen()
+    print("%s's Basic Pokemon:\n" % player.name)
     cardList = []
     optionNo = 0
     for card in player.hand:
@@ -325,14 +328,44 @@ def selectStartingActivePokemon(player):
                 cardList.append(card)
                 print("%d. %s" % (optionNo, card.name))
     while True:
-        option = input("\n%s: Select the number of your starting active pokemon" % player.name)
+        option = input("\n%s: Select the number of your starting active pokemon:    " % player.name)
         try:
             selectedNo = int(option)-1
             player.active.append(removeCardFromHand(cardList[selectedNo], player))
             return
         except:
-            traceback.print_exc()
             print("error: please select a number")
+
+#displays all basic pokemon in the players hand, awaits number inputs and sets pokemon on the bench until player is done
+def selectStartingBenchedPokemon(player):
+    while True:
+        refreshScreen()
+        print("%s: add as many basic pokemon as you want to your bench\n" % player.name)
+        cardList = []
+        optionNo = 0
+        for card in player.hand:
+            if ("Pokemon" in str(type(card))):
+                if (card.stage == "Basic"):
+                    optionNo += 1
+                    cardList.append(card)
+                    print("%d. %s" % (optionNo, card.name))
+        if (optionNo == 0):
+            refreshScreen()
+            print("%s has no more pokemon to put on the bench." % player.name)
+            input("Press enter to continue: ")
+            return
+        optionDone = optionNo+1
+        print("%s. Done" % optionDone)
+        option = input("\n%s: Select a pokemon to put on the bench:    " % player.name)
+        try:
+            selectedNo = int(option)-1
+            if (int(option) == optionDone):
+                return
+            addToBench(removeCardFromHand(cardList[selectedNo], player), player)
+            if (len(player.bench) == 5):
+                return
+        except:
+            print("Error: please select a valid number")
 
 #displays all the opponent's active and benched pokemon, awaits a number input and returns the corresponding card object
 def selectOpponentsPokemon(opponent):
@@ -451,3 +484,6 @@ def viewHand(player):
     for card in player.hand:
         optionNo
         print("%d. %s" % (optionNo, card.name))
+
+def refreshScreen():
+        os.system('cls||clear')
