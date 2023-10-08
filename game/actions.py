@@ -25,7 +25,7 @@ def addToBench(pokemon, player):
 
 #Attaches an energy to a selected pokemon
 def attachEnergy(energy, pokemon):
-    pokemon.energies.add(energy)
+    pokemon.energies.append(energy)
 
 #Burns a pokemon, sets isBurned to true
 def burnPokemon(pokemon):
@@ -130,8 +130,16 @@ def inflictBurnDamage(pokemon):
 
 #converts damage to counters and adds them to target pokemon
 def inflictDamage(pokemon, damage):
-    convertDamageToCounters(damage)
-    addDamageCounters(pokemon, damage)
+    input("Damage: %d" % damage)
+    input("In Counters: %d" % convertDamageToCounters(damage))
+    try:
+        counters = convertDamageToCounters(damage)
+        addDamageCounters(pokemon, counters)
+    except:
+        refreshScreen()
+        traceback.print_exc()
+        input()
+
 
 #Inflicts poison damage to a pokemon
 def inflictPoisonDamage(pokemon):

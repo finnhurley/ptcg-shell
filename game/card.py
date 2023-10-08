@@ -31,6 +31,7 @@ class Pokemon(Card):
         self.pokemonType = info["type"]
         self.pokemonHp = info["hp"]
         self.stage = info["stage"]
+        self.evolvesFrom = ""
         if (self.stage != "Basic"):
             self.evolvesFrom = info["evolvesFrom"]
         self.weaknessType = info["weakness"]
@@ -51,7 +52,10 @@ class Pokemon(Card):
     #Calculates and prints the remaining HP for a pokemon
     def getRemainingHP(self):
         dmg = convertCountersToDamage(self.damageCounters)
-        return (int(self.pokemonHp) - dmg)
+        remaining = (int(self.pokemonHp)) - dmg
+        if (remaining < 0):
+            remaining = 0
+        return remaining
     
     #Prints the contents of the pokemon card
     def viewCard(self):
