@@ -60,18 +60,18 @@ class Pokemon(Card):
     #Prints the contents of the pokemon card
     def viewCard(self):
         print("==========")
-        print("%s\n%sHP\nType: %s" % (self.name, self.pokemonHp, self.pokemonType))
-        print("Stage: %s" % self.stage)
+        print(f"{self.name}\n{self.pokemonHp}HP\nType: {self.pokemonType}")
+        print(f"Stage: {self.stage}")
         if (self.stage != "Basic"):
-            print("Evolves from %s" % self.evolvesFrom)
+            print(f"Evolves from {self.evolvesFrom}")
         print("----------")
         for i in range(len(self.moves)):
-            print("Move %s:" % str(i+1))
+            print(f"Move {str(i+1)}: ")
             self.moves[i].printMove()
             print("----------")
-        print("weakness: %s" % self.weaknessType)
-        print("resistance: %s" % self.resistanceType)
-        print("retreat cost: %s\n==========" % self.retreatCost)
+        print(f"weakness: {self.weaknessType}")
+        print(f"resistance: {self.resistanceType}")
+        print(f"retreat cost: {self.retreatCost}\n==========")
                 
 class Trainer(Card):
     def __init__(self, name, trainerInfo):
@@ -83,12 +83,12 @@ class Trainer(Card):
     #Prints the contents of a trainer card
     def viewCard(self):
         print("==========")
-        print("[%s] %s\n" % (self.cardType, self.name))
+        print(f"{self.cardType}: {self.name}\n")
         if(self.cardType == "Supporter"):
             print("----------")
             print("You can only use 1 Supporter Card Per Turn")
         print("----------")
-        print("%s" % self.effect)
+        print(f"{self.effect}")
         print("==========")
 
 class Energy(Card):
@@ -100,8 +100,8 @@ class Energy(Card):
     #Prints the contents of an energy card
     def viewCard(self):
         print("==========")
-        print("[%s] %s\n" % (self.cardType, self.name))
-        print("Attach this card to any pokemon to provide 1 %s." % self.name)
+        print(f"[{self.cardType}] {self.name}\n")
+        print(f"Attach this card to any pokemon to provide 1 {self.name}")
 
 #Converts pokemon move to a function name to be called from the PokemonMoves folder
 #e.g. Pikachu's Thunder Jolt will return the function name pikachuThunderJolt, which would be called from moves.py

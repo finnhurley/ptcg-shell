@@ -78,6 +78,10 @@ class Game:
                             selectedMove.action(player, opponent)
                             afterHp = opponent.activePokemon().getRemainingHP()
                             print("Foe's %s took the hit! %d -> %d HP" % (opponent.activePokemon().name, initHp, afterHp))
+                            if(isKnockedOut(opponent.activePokemon())):
+                                knockOutPokemon(opponent.activePokemon())
+                                print(f"{opponent.activePokemon.name()} Fainted!")
+                                print(f"{player.name} took a prize card! (Prizes left: {len(player.prizes)})")
                             self.hasAttacked = True
                             input("Press enter to end turn")
                             return
@@ -98,7 +102,7 @@ class Game:
         viewingDiscardPile = True
         while viewingDiscardPile:
             refreshScreen()
-            print("%s's discard pile" % player.name)
+            print(f"{player.name}'s discard pile")
             if (len(player.discardPile) == 0):
                 print("There's nothing here!")
             else:
@@ -112,22 +116,22 @@ class Game:
     #Displays info on a player's board
     def dumpPlayerBoard(self, player):
         active = player.activePokemon()
-        print("%s:      Hand: %d      Prize Cards: %d      Deck: %d\n" % (player.name, len(player.hand), len(player.prizes), len(player.deck.cards)))
+        print(f"{player.name}   Hand: {len(player.hand)}    Prize Cards: {len(player.prizes)}   Deck: {len(player.deck.cards)}")
         print("Active Pokemon:")
         statusString = ""
-        playerInfoString = "%s%s, [%s] %d/%s HP, Energies: %d " % (active.name, statusString, active.pokemonType, active.getRemainingHP(), active.pokemonHp, len(active.energies))
+        playerInfoString = f"{active.name}{statusString}, [{active.pokemonType}] {active.getRemainingHP()}/{active.pokemonHp} HP, Energies: {len(active.energies)}"
         statusString = " ("
         if (active.isPoisoned):
             statusString += " Poisoned "
         if (active.isBurned):
             statusString += " Burned "
         if (active.statusCondition is not None):
-            statusString += " %s " % active.statusCondition
+            statusString += f"{active.statusCondition}"
         statusString += ")"
         print(playerInfoString)
         print("\nBench:")
         for poke in player.bench:
-            print("%s: [%s] %s/%s HP" % (poke.name, poke.pokemonType, poke.getRemainingHP(), poke.pokemonHp))
+            print(f"{poke.name}: [{poke.pokemonType}] {poke.getRemainingHP()}/{poke.pokemonHp} HP")
 
     #does all the turn ending checks like status conditions etc.
     def endTurn(self, player):
@@ -145,7 +149,7 @@ class Game:
         if (player.activePokemon().statusCondition == "Paralyzed"):
             cureStatus(player.activePokemon())
         while True:
-            print("%s's Turn is over." % player.name)
+            print(f"{player.name}'s Turn is over.")
             option = input("Press enter to end turn:  ")
             return
             
@@ -157,7 +161,7 @@ class Game:
             pokemonEnergies.append(energy.energyType)
         for name in move.cost:
             moveCost.append(name)
-        print("Energy Check for %s..." % move.moveName)
+        print(f"Energy Check for {move.moveName}...")
         for e in pokemonEnergies:
             for c in range(0, len(moveCost)):
                 if (moveCost[c]==e or moveCost[c]=="Any"):
@@ -369,6 +373,7 @@ class Game:
                     self.loser = player
                     self.forfeit = True
                     isTurn = False
+        self.winCheck()
         self.endTurn(player)
 
     #Displays a banner stating the player who's turn it is
@@ -612,6 +617,15 @@ class Game:
             print("Remaining HP: %d (%d Damage Counters)" % (benchedPoke.getRemainingHP(), benchedPoke.damageCounters))
             option = input("\nPress Enter to return:  ")
             return
+        
+    #Does some end of battle win condition checks
+    def winCheck(self, player, opponent):
+        if ((len(opponent.active) == 0 and len(opponent.bench) == 0) or len(player.prizes == 0)):
+            winner = player.name
+            loser = opponent.name
+        if ((len(player.active) == 0 and len(player.bench) == 0) or len(opponent.prizes) == 0):
+            loser = player.name
+            winner = opponent.name
 
     #Displays the win conditions and the winner of the game
     def winMenu(self):

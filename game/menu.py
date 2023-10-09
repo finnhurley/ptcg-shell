@@ -18,7 +18,7 @@ class Menu:
         viewingPage = True
         while viewingPage:
             refreshScreen()
-            print("Name: %s     | Deck: %s" % (self.p2.name, self.p2.deck.name))
+            print(f"Name: {self.p2.name}    | Deck: {self.p2.deck.name}")
             option = input("1. Edit Name     2. Select Deck      3. Exit    : ")
             if (option == "1"):
                 newName = input("Enter New Name: ")
@@ -33,7 +33,7 @@ class Menu:
         viewingPage = True
         while viewingPage:
             refreshScreen()
-            print("Name: %s     | Deck: %s" % (self.p1.name, self.p1.deck.name))
+            print(f"Name: {self.p1.name}    | Deck: {self.p1.deck.name}")
             option = input("1. Edit Name     2. Select Deck      3. Exit    : ")
             if (option == "1"):
                 newName = input("Enter New Name: ")
@@ -71,7 +71,7 @@ class Menu:
 
     #Resets the winner at the end of every game
     def resetWinner(self):
-        print("%s is the winner!\n" % self.g.winner.name)
+        print(f"{self.g.winner.name} is the winner!\n")
         self.g.winner = None
 
     #Displays a list of deck options for the player to select
@@ -83,7 +83,7 @@ class Menu:
             options = 0
             for deck in deckList:
                 options += 1
-                print("%d. %s" % (options, deck.name))
+                print(f"{options}. {deck.name}")
             input("\nSelect Deck: ")
             if ((options-1) in range(len(deckList))):
                 player.deck = deckList[options-1]

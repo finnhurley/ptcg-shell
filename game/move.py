@@ -17,9 +17,9 @@ class Attack(Move):
         self.action = action
 
     def printMove(self):
-        print("%s (cost:" % self.moveName, self.cost, ")")
-        print("%s" % self.description)
-        print("%s" % self.damage)
+        print(f"{self.moveName} (cost: {self.cost} ")
+        print(f"{self.description}")
+        print(f"{self.damage}")
 
 #defines a pokepower, a type of move, every pokepower has a description and action
 class PokePower(Move):
@@ -30,8 +30,8 @@ class PokePower(Move):
         self.action = action
 
     def printMove(self):
-        print("PokePower: %s" % self.moveName)
-        print("%s" % self.description)
+        print(f"PokePower: {self.moveName}")
+        print(f"{self.description}")
 
 #defines a pokebody, a type of move, every pokebody as a description and action
 class PokeBody(Move):
@@ -41,8 +41,8 @@ class PokeBody(Move):
         self.action = action
 
     def printMove(self):
-        print("PokeBody: %s" % self.moveName)
-        print("%s" % self.description)
+        print(f"PokeBody: {self.moveName}")
+        print(f"{self.description}")
 
 #returns the function for the corresponding moveName, returns function in uncalled state
 def getFunctionNameAsString(pokemonName, moveName):

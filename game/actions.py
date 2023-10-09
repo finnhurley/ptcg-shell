@@ -130,8 +130,6 @@ def inflictBurnDamage(pokemon):
 
 #converts damage to counters and adds them to target pokemon
 def inflictDamage(pokemon, damage):
-    input("Damage: %d" % damage)
-    input("In Counters: %d" % convertDamageToCounters(damage))
     try:
         counters = convertDamageToCounters(damage)
         addDamageCounters(pokemon, counters)
@@ -177,10 +175,11 @@ def isCardOnBench(card, player):
 def isKnockedOut(pokemon):
     remainingHp = getRemainingHp(pokemon)
     if (remainingHp == 0):
-        print("%s has fainted" % pokemon.name)
+        print(f"{pokemon.name} has fainted!")
         return True
     else:
         print("%s HP: %d/%d" % (pokemon.name, remainingHp, pokemon.pokemonHp))
+        print(f"{pokemon.name} HP: {remainingHp}/{pokemon.pokemonHp}")
         return False
     
 #knocks out a pokemon, adds it and all attached cards to the discard pile
@@ -288,11 +287,11 @@ def selectOpponentsPokemon(opponent):
     cardList = []
     cardList.append(opponent.activePokemon())
     optionNo = 1
-    print("%d. %s (Active)" % (optionNo, opponent.activePokemon().name))
+    print(f"{optionNo}. {opponent.activePokemon().name} (Active)")
     for card in opponent.bench:
         optionNo += 1
         cardList.append(card)
-        print("%d. %s (Bench)" % (optionNo, card.name))
+        print(f"{optionNo}. {card.name} (Bench)")
     while True:
         option = input("\nselect a pokemon by corresponding number:")
         try:
@@ -308,7 +307,7 @@ def selectOpponentsBenchedPokemon(opponent):
     for card in opponent.bench:
         optionNo += 1
         cardList.append(card)
-        print("%d. %s (Bench)" % (optionNo, card.name))
+        print(f"{optionNo}. {card.name} (Bench)")
     while True:
         option = input("\nselect a pokemon by corresponding number:")
         try:
@@ -321,11 +320,11 @@ def selectOpponentsBenchedPokemon(opponent):
 def selectOwnBenchedPokemon(player):
     cardList = []
     optionNo = 0
-    print("%d. %s (Active)" % (optionNo, player.activePokemon().name))
+    print(f"{optionNo}. {player.activePokemon().name}")
     for card in player.bench:
         optionNo += 1
         cardList.append(card)
-        print("%d. %s (Bench)" % (optionNo, card.name))
+        print("{optionNo}. {card.name} (Bench)")
     while True:
         option = input("\nselect a pokemon by corresponding number:")
         try:
@@ -339,11 +338,11 @@ def selectOwnPokemon(player):
     cardList = []
     cardList.append(player.activePokemon())
     optionNo = 1
-    print("%d. %s (Active)" % (optionNo, player.activePokemon().name))
+    print(f"{optionNo}. {player.activePokemon().name} (Active)")
     for card in player.bench:
         optionNo += 1
         cardList.append(card)
-        print("%d. %s (Bench)" % (optionNo, card.name))
+        print(f"{optionNo}. {card.name} (Bench)")
     while True:
         option = input("\nselect a pokemon by corresponding number:")
         try:
@@ -360,7 +359,7 @@ def selectPokemonFromDeck(player):
         if ("Pokemon" in str(type(card))):
             optionNo += 1
             cardList.append(card)
-            print("%d. %s: %s" % (optionNo, card.name, card.stage))
+            print(f"{optionNo}. {card.name}: {card.stage}")
     while True:
         option = input("\nselect a pokemon by corresponding number:")
         try:
@@ -384,9 +383,9 @@ def selectStartingActivePokemon(player):
             if (card.stage == "Basic"):
                 optionNo += 1
                 cardList.append(card)
-                print("%d. %s" % (optionNo, card.name))
+                print(f"{optionNo}. {card.name}")
     while True:
-        option = input("\n%s: Select the number of your starting active pokemon:    " % player.name)
+        option = input(f"\n{player.name}: Select the number of your starting active pokemon:    ")
         try:
             selectedNo = int(option)-1
             player.active.append(removeCardFromHand(cardList[selectedNo], player))
@@ -406,15 +405,15 @@ def selectStartingBenchedPokemon(player):
                 if (card.stage == "Basic"):
                     optionNo += 1
                     cardList.append(card)
-                    print("%d. %s" % (optionNo, card.name))
+                    print(f"{optionNo}. {card.name}")
         if (optionNo == 0):
             refreshScreen()
-            print("%s has no more pokemon to put on the bench." % player.name)
+            print(f"{player.name} has no more pokemon to put on the bench.")
             input("Press enter to continue: ")
             return
         optionDone = optionNo+1
-        print("%s. Done" % optionDone)
-        option = input("\n%s: Select a pokemon to put on the bench:    " % player.name)
+        print(f"{optionDone}. Done")
+        option = input(f"\n{player.name}: Select a pokemon to put on the bench:    ")
         try:
             selectedNo = int(option)-1
             if (int(option) == optionDone):
@@ -429,9 +428,9 @@ def selectStartingBenchedPokemon(player):
 def sleepCheck(pokemon):
     if (coinToss() == "Heads"):
         pokemon.statusCondition = ""
-        print(pokemon.name, "woke up!")
+        print(f"{pokemon.name} woke up!")
     else:
-        print(pokemon.name, "is fast asleep.")
+        print(f"{pokemon.name} is fast asleep.")
 
 #Sends pokemon to sleep, sets statusCondition to Asleep
 def sleepPokemon(pokemon):
@@ -448,7 +447,7 @@ def useAttack(pokemon, move, player, opponent):
                 m.action(player, opponent)
                 return True
     else:
-        print("Error: %s doesn't enough enough energy to use %s." % pokemon.name, move.moveName)
+        print(f"Error: {pokemon.name} doesn't enough enough energy to use {move.moveName}.")
         return False
 
 #Executes a pokemon's pokepower if it hasnt been used this turn, returns boolean if successful
@@ -460,7 +459,7 @@ def usePokePower(pokemon, power, player, opponent):
                 pokemon.pokePowerFlag = True
                 return True
     else:
-        print("Error: %s's %s has already been used this turn" % pokemon.name, power.moveName)
+        print(f"Error: {pokemon.name}'s {power.moveName} has already been used this turn")
         return False
     
 #Lists all pokemon in the hand
