@@ -16,7 +16,7 @@ class Game:
     def attachEnergy(self, energy, player):
         if (self.usedEnergyThisTurn is True):
             refreshScreen()
-            print("%s has already attached an energy this turn!" % player.name)
+            print(f"{player.name} has already attached an energy this turn!")
             input("Press Enter to continue: ")
             return
         selectingEnergyTarget = True
@@ -25,14 +25,14 @@ class Game:
             optionList.append(Card("MissingNo"))
             optionNo = 1
             optionList.insert(optionNo, player.activePokemon())
-            print("%s's Pokemon:\n" % player.name)
-            print("%d. %s [%s] Energies: %d" % (optionNo, player.activePokemon().name, player.activePokemon().pokemonType, len(player.activePokemon().energies)))
+            print(f"{player.name}'s Pokemon:\n")
+            print(f"{optionNo}. {player.activePokemon().name} [{player.activePokemon().pokemonType}] Energies: {len(player.activePokemon().energies)}")
             for poke in player.bench:
                 optionNo += 1
                 optionList.insert(optionNo, poke)
-                print("%d. %s [%s] Energies: %d" % (optionNo, poke.name, poke.pokemonType, len(poke.energies)))
+                print(f"{optionNo}. {poke.name} [{poke.pokemonType}] Energies: {len(poke.energies)}")
             backOption = optionNo+1
-            print("%d. Back" % backOption)
+            print(f"{backOption}. Back")
             option = input("\nSelect Pokemon to attach energy to:   ")
             try:
                 if(int(option) == backOption):
@@ -40,7 +40,7 @@ class Game:
                 if(int(option) is not 0 and int(option) in range(len(optionList))):
                     refreshScreen()
                     attachEnergy(removeCardFromHand(energy, player), optionList[int(option)])
-                    print("%s has been attached to %s" % (energy.name, optionList[int(option)].name))
+                    print(f"{energy.name} has been attached to {optionList[int(option)].name}")
                     input("\nPress enter to continue:   ")
                     self.usedEnergyThisTurn = True
                     return
@@ -58,14 +58,13 @@ class Game:
                 optionNo +=1
                 i += 1
                 trueIndex.append(i)
-                print("%d. %s" % (optionNo, move.moveName))
+                print(f"{optionNo}. {move.moveName}")
             cancel = optionNo + 1
-            print("%d. Cancel" % cancel)
+            print(f"{cancel}. Cancel")
             option = input("Select Attack: ")
-            #optionInt = int(option)
             try:
-                input("optionInt = %d" % int(option))
-                input("truIndex = %d" % trueIndex[int(option)])
+                input(f"optionInt = {int(option)}")
+                input(f"truIndex = {trueIndex[int(option)]}")
                 if (int(option) == cancel):
                     decideAttack = False
                 if (int(option) in range(len(pokemon.moves))):
@@ -73,11 +72,11 @@ class Game:
                     input(selectedMove.moveName)
                     if (self.energyCheck(pokemon, selectedMove)):
                         try:
-                            input("%s used %s!" % (pokemon.name, selectedMove.moveName))
+                            input(f"{pokemon.name} used {selectedMove.moveName}")
                             initHp = opponent.activePokemon().getRemainingHP()
                             selectedMove.action(player, opponent)
                             afterHp = opponent.activePokemon().getRemainingHP()
-                            print("Foe's %s took the hit! %d -> %d HP" % (opponent.activePokemon().name, initHp, afterHp))
+                            print(f"Foe's {opponent.activePokemon().name} took the hit! {initHp} -> {afterHp} HP")
                             if(isKnockedOut(opponent.activePokemon())):
                                 knockOutPokemon(opponent.activePokemon())
                                 print(f"{opponent.activePokemon.name()} Fainted!")
@@ -91,7 +90,7 @@ class Game:
                             input("")
                     else:
                         refreshScreen()
-                        print("%s doesn't have enough energy to perform %s!" % (pokemon.name, selectedMove.moveName))
+                        print(f"{pokemon.name} doesn't have enough energy to perform {selectedMove.moveName}")
             except:
                 traceback.print_exc()
                 print("Error. Please select a number!")
@@ -209,7 +208,7 @@ class Game:
         prevStageExists = self.hasPrevStage(pokemon, player)
         if (prevStageExists is False):
             refreshScreen()
-            print("%s cannot be played as %s does not have a %s in play." % (pokemon.name, player.name, pokemon.evolvesFrom))
+            print(f"{pokemon.name} cannot be played as {player.name} does not have a {pokemon.evolvesFrom} in play.")
             input("\nPress Enter to Return:   ")
             return False
         else:
@@ -223,7 +222,7 @@ class Game:
         viewingSelectScreen = True
         evolveSuccess = False
         while viewingSelectScreen:
-            print("Evolve %s into %s.\n" % (pokemon.evolvesFrom, pokemon.name))
+            print(f"Evolve {pokemon.evolvesFrom} into {pokemon.name}.\n")
             optionNo = 0
             trueIndex = -1
             evoList = []
@@ -234,7 +233,7 @@ class Game:
             if (player.activePokemon().name == pokemon.evolvesFrom):
                 optionNo += 1
                 evoList.insert(optionNo, player.activePokemon())
-                print("%d. (Active) %s" % (optionNo, player.activePokemon().name))
+                print(f"{optionNo}. (Active) {player.activePokemon().name}")
                 activeFlag = True
             for poke in player.bench:
                 trueIndex += 1
@@ -242,11 +241,11 @@ class Game:
                 if (poke.name == pokemon.evolvesFrom):
                     optionNo +=1
                     evoList.insert(optionNo, poke)
-                    print("%d. (Bench) %s (%d/%s HP) Energies: %d" % (optionNo, poke.name, poke.getRemainingHP(), poke.pokemonHp, len(poke.energies)))
+                    print(f"{optionNo}. (Bench) {poke.name} ({poke.getRemainingHp()}/{poke.pokemonHp} HP) Energies: {len(poke.energies)}")
                     print(trueIndex)
             backOption = optionNo + 1
-            print("%d. Back" % backOption)
-            option = input("Select %s to evolve:    " % pokemon.evolvesFrom)
+            print(f"{backOption}. Back")
+            option = input(f"Select {pokemon.evolvesFrom} to evolve:    ")
             try:
                 refreshScreen()
                 if (option == str(backOption) or option == "0"):
@@ -255,24 +254,24 @@ class Game:
                     if (activeFlag) ==  True:
                         evolution = self.evolveActive(player, pokemon)
                         refreshScreen()
-                        print("....what? %s is evolving!" % evolution.evolvesFrom)
-                        print("Congratulations! Your %s evolved into %s!" % (evolution.evolvesFrom, evolution.name))
-                        print("%d/%s HP" % (evolution.getRemainingHP(), evolution.pokemonHp))
+                        print(f"....what? {evolution.evolvesFrom} is evolving!")
+                        print(f"Congratulations! Your {evolution.evolvesFrom} evolved into {evolution.name}!")
+                        print(f"{evolution.getRemainingHP()}/{evolution.pokemonHp} HP")
                         print("Energies:    ")
                         for energy in evolution.energies:
-                            print(" %s" % energy.name)
+                            print(f" {energy.name}")
                         input("\n\nPress enter to return:   ")
                         viewingSelectScreen = False
                     else:
                         evolution = self.evolveBench(player, removeCardFromHand(pokemon, player), trueIndexList[int(option)])
                         viewingSelectScreen = False
                         refreshScreen()
-                        print("....what? %s is evolving!" % evolution.evolvesFrom)
-                        print("Congratulations! Your %s evolved into %s!" % (evolution.evolvesFrom, evolution.name))
-                        print("%d/%s HP" % (evolution.getRemainingHP(), evolution.pokemonHp))
+                        print(f"....what? {evolution.evolvesFrom} is evolving!")
+                        print(f"Congratulations! Your {evolution.evolvesFrom} evolved into {evolution.name}!")
+                        print(f"{evolution.getRemainingHP()}/{evolution.pokemonHp} HP")
                         print("Energies:    ")
                         for energy in evolution.energies:
-                            print(" %s" % energy.name)
+                            print(f" {energy.name}")
                         input("\n\nPress enter to return:   ")
                         viewingSelectScreen = False
             except:
@@ -296,9 +295,9 @@ class Game:
             refreshScreen() 
             addToBench(removeCardFromHand(pokemon, player), player)
             refreshScreen()
-            print("%s has been placed on the bench.\n%s's bench:" % (pokemon.name, player.name))
+            print(f"{pokemon.name} has been placed on the bench.\n{player.name}'s bench:")
             for poke in player.bench:
-                print("%s [%s] %d/%s HP     Energies: %d" % (poke.name, poke.pokemonType, poke.getRemainingHP(), poke.pokemonHp, len(poke.energies)))
+                print(f"{poke.name} [{poke.pokemonType}] {poke.getRemainingHP()}/{poke.pokemonHp} HP     Energies: {len(poke.energies)}")
             input("Press enter to continue: ")
             return
         except:
@@ -332,7 +331,7 @@ class Game:
         while menu:
             refreshScreen()
             print("Game started!")
-            print("The coin landed on %s! %s will go first!" % (coin, first.name))
+            print(f"The coin landed on {coin}! {first.name} will go first!")
             option = input("\n\nPress enter to start:  ")
             menu = False
         refreshScreen()
@@ -353,7 +352,7 @@ class Game:
             if (self.hasAttacked is True):
                 break
             options = "1. View Hand     2. View Active     3. View Bench     4. View Board    5. End Turn    : "
-            print("\nWhat will %s do?" % player.name)
+            print(f"\nWhat will {player.name} do?")
             playerMove = input(options)
             refreshScreen()
             if (playerMove == "1"):
@@ -379,7 +378,7 @@ class Game:
     #Displays a banner stating the player who's turn it is
     def turnBanner(self, player):
         print("--------------------")
-        print("%s's Turn" % player.name)
+        print(f"{player.name}'s Turn")
         print("--------------------")
 
     #viewing the active pokemon presents the player with more options
@@ -392,19 +391,19 @@ class Game:
         while viewingActive:
             poke.viewCard()
             print("EnergyList: ", EnergyList)
-            print("Remaining HP: %d (%d Damage Counters)" % (poke.getRemainingHP(), poke.damageCounters))
-            print("\nWhat will %s do?" % poke.name)
+            print(f"Remaining HP: {poke.getRemainingHP()} ({poke.damageCounters} Damage Counters)")
+            print(f"\nWhat will {poke.name} do?")
             playerMove = input("\n1. Attack    2. Retreat    3. Back    : ")
             if (playerMove == "1"):
                 self.chooseAttack(poke, player, opponent)
                 return
             if (playerMove == "2"):
                 if (poke.canRetreat()):
-                    print("\n%s return!" % poke.name)
+                    print(f"\n{poke.name} return!")
                     return
                 else:
                     refreshScreen()
-                    print("\n%s can't retreat! Not enough energies.\n" % poke.name)
+                    print(f"\n%{poke.name} can't retreat! Not enough energies.\n")
             if (playerMove == "3"):
                 refreshScreen()
                 return
@@ -415,19 +414,19 @@ class Game:
         while viewingBoard:
             refreshScreen()
             if (len(player.bench) == 0):
-                print("%s doesn't have any pokemon on their bench!" % player.name)
+                print(f"{player.name} doesn't have any pokemon on their bench!")
                 input("Press enter to return:   ")
                 return
             else:
-                print("%s's Bench" % player.name)
+                print(f"{player.name}'s Bench")
                 optionNo = 0
                 pokeList = []
                 for poke in player.bench:
                     optionNo += 1
-                    print("%d. %s [%s]" % (optionNo, poke.name, poke.pokemonType))
+                    print(f"{optionNo}. {poke.name} [{poke.pokemonType}]")
                     pokeList.append(poke)
                 backOption = optionNo+1
-                print("%d. Back\n" % backOption)
+                print(f"{backOption}. Back\n")
                 option = input("Select a pokemon by number")
                 selectedNo = int(option)-1
                 try:
@@ -450,16 +449,16 @@ class Game:
             refreshScreen()
             benchedPoke.viewCard()
             print("EnergyList: ", EnergyList)
-            print("Remaining HP: %d (%d Damage Counters)" % (benchedPoke.getRemainingHP(), benchedPoke.damageCounters))
+            print(f"Remaining HP: {benchedPoke.getRemainingHP()} ({benchedPoke.damageCounters} Damage Counters)")
             for move in benchedPoke.moves:
                 if (move.moveType == "PokeBody"):
                     hasPokePower = True
                     break
             backOption = optionNo
             if (hasPokePower == True):
-                print("%d. Use PokePower" % optionNo)
+                print(f"{optionNo}. Use PokePower")
                 backOption += 1
-            print("%d. Back" % backOption)
+            print(f"{backOption}. Back")
             option = input("\nSelect an option:  ")
             if (int(option) == backOption):
                 refreshScreen()
@@ -482,7 +481,7 @@ class Game:
                 option = "Use"
             if (card.cardType == "Energy"):
                 option = "Attach"
-            print("1. %s    2. Back" % option)
+            print(f"1. {option}   2. Back")
             playerMove = input("Select option: ")
             refreshScreen()
             if (playerMove == "1"):
@@ -542,9 +541,9 @@ class Game:
             for card in player.hand:
                 optionNo += 1
                 optionList.insert(optionNo, card)
-                print("%d. %s [%s]" % (optionNo, card.name, card.cardType))
+                print(f"{optionNo}. {card.name} [{card.cardType}]")
             backOption = optionNo+1
-            print("%s. Back" % backOption)
+            print(f"{backOption}. Back")
             playerMove = input("Select a card: ")
             refreshScreen()
             try:
@@ -555,7 +554,7 @@ class Game:
                     self.viewCardInHand(player, opponent, optionList[int(playerMove)])
                     refreshScreen()
             except:
-                print("Error, please select a valid number. You select %s" % playerMove)
+                print(f"Error, please select a valid number. You select {playerMove}")
                 refreshScreen()
 
     #viewing the opponent's active pokemon
@@ -569,7 +568,7 @@ class Game:
             refreshScreen()
             poke.viewCard()
             print("EnergyList: ", EnergyList)
-            print("Remaining HP: %d (%d Damage Counters)" % (poke.getRemainingHP(), poke.damageCounters))
+            print(f"Remaining HP: {poke.getRemainingHP()} ({poke.damageCounters} Damage Counters)")
             playerMove = input("\n1. Back    : ")
             if (playerMove == "1"):
                 refreshScreen()
@@ -581,19 +580,19 @@ class Game:
         while viewingBoard:
             refreshScreen()
             if (len(opponent.bench) == 0):
-                print("%s doesn't have any pokemon on their bench!" % opponent.name)
+                print(f"{opponent.name} doesn't have any pokemon on their bench!")
                 input("Press enter to return:   ")
                 return
             else:
-                print("%s's Bench" % opponent.name)
+                print(f"{opponent.name}'s Bench")
                 optionNo = 0
                 pokeList = []
                 for poke in opponent.bench:
                     optionNo += 1
-                    print("%d. %s [%s]" % (optionNo, poke.name, poke.pokemonType))
+                    print(f"{optionNo}. {poke.name} [{poke.pokemonType}]")
                     pokeList.append(poke)
                 backOption = optionNo+1
-                print("%d. Back\n" % backOption)
+                print(f"{backOption}. Back\n")
                 option = input("Select a pokemon by number")
                 selectedNo = int(option)-1
                 try:
@@ -614,7 +613,7 @@ class Game:
             refreshScreen()
             benchedPoke.viewCard()
             print("EnergyList: ", EnergyList)
-            print("Remaining HP: %d (%d Damage Counters)" % (benchedPoke.getRemainingHP(), benchedPoke.damageCounters))
+            print(f"Remaining HP: {benchedPoke.getRemainingHP()} ({benchedPoke.damageCounters} Damage Counters)")
             option = input("\nPress Enter to return:  ")
             return
         
@@ -632,16 +631,16 @@ class Game:
         while True:
             refreshScreen()
             if (self.forfeit):
-                print("%s has forfeited!" % self.loser.name)
-                print("%s is the winner!!" % self.winner.name)
+                print(f"{self.loser.name} has forfeited!")
+                print(f"{self.winner.name} is the winner!!")
                 option = input("Enter any key to continue: ")
                 return
             if (len(self.winner.prizeCards) == 0):
-                print("%s has no prize cards left!" % (self.winner.name))
+                print(f"{self.winner.name} has no prize cards left!")
             if (len(self.loser.bench) == 0):
-                print("%s has run out of pokemon!" % self.loser.name)
+                print(f"{self.loser.name} has run out of pokemon!")
             if (len(self.loser.deck) == 0):
-                print("%s has decked out!" % self.loser.name)
-            print("%s is the winner!!" % self.winner.name)
+                print(f"{self.loser.name} has decked out!")
+            print(f"{self.winner.name} is the winner!!")
             option = input("Enter any key to continue: ")
             return

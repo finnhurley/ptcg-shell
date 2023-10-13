@@ -324,7 +324,7 @@ def selectOwnBenchedPokemon(player):
     for card in player.bench:
         optionNo += 1
         cardList.append(card)
-        print("{optionNo}. {card.name} (Bench)")
+        print(f"{optionNo}. {card.name} (Bench)")
     while True:
         option = input("\nselect a pokemon by corresponding number:")
         try:
