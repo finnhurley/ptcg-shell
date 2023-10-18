@@ -63,13 +63,10 @@ class Game:
             print(f"{cancel}. Cancel")
             option = input("Select Attack: ")
             try:
-                input(f"optionInt = {int(option)}")
-                input(f"truIndex = {trueIndex[int(option)]}")
                 if (int(option) == cancel):
                     decideAttack = False
                 if (int(option) in range(len(pokemon.moves))):
                     selectedMove = pokemon.moves[trueIndex[int(option)]]
-                    input(selectedMove.moveName)
                     if (self.energyCheck(pokemon, selectedMove)):
                         try:
                             input(f"{pokemon.name} used {selectedMove.moveName}")
@@ -78,7 +75,7 @@ class Game:
                             afterHp = opponent.activePokemon().getRemainingHP()
                             print(f"Foe's {opponent.activePokemon().name} took the hit! {initHp} -> {afterHp} HP")
                             if(isKnockedOut(opponent.activePokemon())):
-                                knockOutPokemon(opponent.activePokemon())
+                                knockOutPokemon(opponent.activePokemon(), opponent)
                                 print(f"{opponent.activePokemon.name()} Fainted!")
                                 print(f"{player.name} took a prize card! (Prizes left: {len(player.prizes)})")
                             self.hasAttacked = True
@@ -372,7 +369,7 @@ class Game:
                     self.loser = player
                     self.forfeit = True
                     isTurn = False
-        self.winCheck()
+        self.winCheck(player, opponent)
         self.endTurn(player)
 
     #Displays a banner stating the player who's turn it is
@@ -619,12 +616,14 @@ class Game:
         
     #Does some end of battle win condition checks
     def winCheck(self, player, opponent):
-        if ((len(opponent.active) == 0 and len(opponent.bench) == 0) or len(player.prizes == 0)):
-            winner = player.name
-            loser = opponent.name
-        if ((len(player.active) == 0 and len(player.bench) == 0) or len(opponent.prizes) == 0):
-            loser = player.name
-            winner = opponent.name
+        if (len(opponent.active) == 0):
+            if (len(opponent.bench) == 0):
+                self.winner = player.name
+                self.loser = opponent.name
+        if (len(player.active) == 0):
+            if (len(player.bench) == 0):
+                self.winner = opponent.name
+                self.loser = player.name
 
     #Displays the win conditions and the winner of the game
     def winMenu(self):

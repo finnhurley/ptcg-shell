@@ -73,8 +73,12 @@ def numelFirebreathing(player, opponent):
         pkmn = player.activePokemon()
         defendingPokemon = opponent.activePokemon()
         damage = 10
-        if (coinToss == "Heads"):
+        coin = coinToss()
+        if (coin == "Heads"):
+            print("Coin Landed On Heads!")
             damage += 10
+        else:
+            print("Coin Landed on Tails!")
         damage = damageMultiplier(pkmn, defendingPokemon, damage)
         inflictDamage(defendingPokemon, damage)
 

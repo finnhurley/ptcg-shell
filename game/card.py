@@ -55,7 +55,7 @@ class Pokemon(Card):
         remaining = (int(self.pokemonHp)) - dmg
         if (remaining < 0):
             remaining = 0
-        return remaining
+        return int(remaining)
     
     #Prints the contents of the pokemon card
     def viewCard(self):

@@ -117,11 +117,11 @@ def fromDiscardPile(card, player):
 #returns the remaining HP for a pokemon
 def getRemainingHp(pokemon):
     damageCounterToDamage = pokemon.damageCounters * 10
-    remainingHp = pokemon.pokemonHp - damageCounterToDamage
+    remainingHp = int(pokemon.pokemonHp) - damageCounterToDamage
     if (remainingHp <= 0):
         return 0
     else:
-        return damageCounterToDamage
+        return remainingHp
             
 #Inflicts burn damage to a pokemon
 def inflictBurnDamage(pokemon):
@@ -132,6 +132,7 @@ def inflictBurnDamage(pokemon):
 def inflictDamage(pokemon, damage):
     try:
         counters = convertDamageToCounters(damage)
+        input(counters)
         addDamageCounters(pokemon, counters)
     except:
         refreshScreen()
@@ -178,8 +179,7 @@ def isKnockedOut(pokemon):
         print(f"{pokemon.name} has fainted!")
         return True
     else:
-        print("%s HP: %d/%d" % (pokemon.name, remainingHp, pokemon.pokemonHp))
-        print(f"{pokemon.name} HP: {remainingHp}/{pokemon.pokemonHp}")
+        print(f"{pokemon.name} HP: {int(remainingHp)}/{pokemon.pokemonHp}")
         return False
     
 #knocks out a pokemon, adds it and all attached cards to the discard pile
