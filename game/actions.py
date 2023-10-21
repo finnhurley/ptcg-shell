@@ -187,15 +187,15 @@ def knockOutPokemon(pokemon, player):
     if (isCardActivePokemon(pokemon, player) is True):
         for i in range(len(player.active)):
             if (player.active[i].name == pokemon.name):
-                discard = player.active[i].name
-                if (discard.previousStage != None):
-                    while discard.previousStage != None:
+                discard = player.active[i]
+                if (discard.previousCard != None):
+                    while discard.previousCard != None:
                         next = discard.previousCard
                         toDiscardPile(discard, player)
                         discard = next
                 for energy in pokemon.energies:
                     toDiscardPile(energy, player)
-                toDiscardPile(removeCardFromActive(discard), player)
+                toDiscardPile(removeCardFromActive(discard, player), player)
 
 #Paralyzes the pokemon, sets statusCondition to Paralyzed
 def paralyzePokemon(pokemon):
@@ -236,7 +236,7 @@ def setActive(pokemon, player):
 
 #pops the first prize card in the list, returns it as a card object
 def takePrizeCard(player):
-    prizeCard = player.prizeCards.pop(1)
+    prizeCard = player.prizes.pop(1)
     return prizeCard
 
 #adds a card to the players discard pile

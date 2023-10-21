@@ -62,29 +62,33 @@ class Game:
             cancel = optionNo + 1
             print(f"{cancel}. Cancel")
             option = input("Select Attack: ")
+            input(f"option selected: {option}")
             try:
+                input(f"")
                 if (int(option) == cancel):
                     decideAttack = False
-                if (int(option) in range(len(pokemon.moves))):
-                    selectedMove = pokemon.moves[trueIndex[int(option)]]
-                    if (self.energyCheck(pokemon, selectedMove)):
-                        try:
-                            input(f"{pokemon.name} used {selectedMove.moveName}")
-                            initHp = opponent.activePokemon().getRemainingHP()
-                            selectedMove.action(player, opponent)
-                            afterHp = opponent.activePokemon().getRemainingHP()
-                            print(f"Foe's {opponent.activePokemon().name} took the hit! {initHp} -> {afterHp} HP")
-                            if(isKnockedOut(opponent.activePokemon())):
-                                knockOutPokemon(opponent.activePokemon(), opponent)
-                                print(f"{opponent.activePokemon.name()} Fainted!")
-                                print(f"{player.name} took a prize card! (Prizes left: {len(player.prizes)})")
-                            self.hasAttacked = True
-                            input("Press enter to end turn")
-                            return
-                        except:
-                            refreshScreen()
-                            traceback.print_exc()
-                            input("")
+                    return
+                input(f"{pokemon.moves[trueIndex[int(option)]].moveName}")
+                selectedMove = pokemon.moves[trueIndex[int(option)]]
+                if (self.energyCheck(pokemon, selectedMove)):
+                    try:
+                        refreshScreen()
+                        input(f"{pokemon.name} used {selectedMove.moveName}")
+                        initHp = opponent.activePokemon().getRemainingHP()
+                        selectedMove.action(player, opponent)
+                        afterHp = opponent.activePokemon().getRemainingHP()  
+                        print(f"Foe's {opponent.activePokemon().name} took the hit! {initHp} -> {afterHp} HP")
+                        if(isKnockedOut(opponent.activePokemon())):
+                            knockOutPokemon(opponent.activePokemon(), opponent)
+                            takePrizeCard(player)
+                            print(f"{player.name} took a prize card! (Prizes left: {len(player.prizes)})")
+                        self.hasAttacked = True
+                        input("Press enter to end turn")
+                        return
+                    except:
+                        refreshScreen()
+                        traceback.print_exc()
+                        input("")
                     else:
                         refreshScreen()
                         print(f"{pokemon.name} doesn't have enough energy to perform {selectedMove.moveName}")

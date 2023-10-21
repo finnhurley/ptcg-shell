@@ -116,7 +116,7 @@ def goldeenFlail(player, opponent):
     if (player.activePokemon().name == "Goldeen"):
         pkmn = player.activePokemon()
         defendingPokemon = opponent.activePokemon()
-        damage = pkmn.damageCounters
+        damage = pkmn.damageCounters * 10
         damage = damageMultiplier(pkmn, defendingPokemon, damage)
         inflictDamage(defendingPokemon, damage)
 
