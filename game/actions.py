@@ -224,7 +224,7 @@ def removeCardFromActive(card, player):
 
 #removes card from bench, returns card object
 def removeFromBench(card, player):
-    if isCardOnBench(card) is True:
+    if isCardOnBench(card, player) is True:
         for i in range(len(player.bench)):
             if(player.bench[i].name == card.name):
                 player.bench.remove(player.bench[i])
@@ -261,6 +261,15 @@ def resistanceCheck(attackingPokemon, defendingPokemon):
         return True
     return False
 
+
+#Swaps the player's active pokemon with the selected benched pokemon
+def retreatPokemon(player, bench):
+    prevActive = player.activePokemon()
+    player.bench.append(player.activePokemon())
+    player.active[0] = bench
+    print(f"{player.name} withdrew {prevActive.name} and sent out {player.activePokemon().name}!")
+
+
 #lists all pokemon in the players deck, player selects number of corresponding pokemon, returns card object
 def selectEnergyFromDeck(player):
     cardList = []
@@ -281,6 +290,7 @@ def selectEnergyFromDeck(player):
         except:
             traceback.print_exc()
             print("error: please select a number")
+
 
 #displays all the opponent's active and benched pokemon, awaits a number input and returns the corresponding card object
 def selectOpponentsPokemon(opponent):
@@ -423,6 +433,10 @@ def selectStartingBenchedPokemon(player):
                 return
         except:
             print("Error: please select a valid number")
+
+#Sets a new active pokemon from the bench
+def setActiveFromBench(player, bench):
+    player.active.append(bench)
 
 #Tosses a coin to see if a pokemon should wake up
 def sleepCheck(pokemon):

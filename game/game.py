@@ -400,8 +400,31 @@ class Game:
                 return
             if (playerMove == "2"):
                 if (poke.canRetreat()):
-                    print(f"\n{poke.name} return!")
-                    return
+                    refreshScreen()
+                    selectingPokemon = True
+                    while selectingPokemon:
+                        print(f"{player.name}'s Bench")
+                        optionNo = 0
+                        pokeList = []
+                        for poke in player.bench:
+                            optionNo += 1
+                            print(f"{optionNo}. {poke.name} [{poke.pokemonType}]")
+                            pokeList.append(poke)
+                        backOption = optionNo+1
+                        print(f"{backOption}. Back\n")
+                        option = input("Select a pokemon by number")
+                        selectedNo = int(option)-1
+                        try:
+                            if (int(option) == backOption):
+                                return
+                            fromBench = removeFromBench(player.bench[selectedNo] ,player)
+                            retreatPokemon(player, fromBench)
+                            input("Press enter to continue")
+                            return
+                        except:
+                            traceback.print_exc()
+                            print("error: please select a valid number")
+                            return
                 else:
                     refreshScreen()
                     print(f"\n%{poke.name} can't retreat! Not enough energies.\n")
